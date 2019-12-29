@@ -1,0 +1,20 @@
+{
+	"Items" : [
+		{
+			"id" : "0",
+			"name" : "Geyser",
+			"standard_block_id" : "1",
+			"standard_foilage_id" : "4",
+			"standard_liquid_id" : "1",
+			"artifact_id" : "1"
+		},
+		{
+			"id" : "1",
+			"name" : "Lava Lake",
+			"standard_block_id" : "2",
+			"standard_foilage_id" : "4",
+			"standard_liquid_id" : "1",
+			"artifact_id" : "4"
+		}
+	]
+}
