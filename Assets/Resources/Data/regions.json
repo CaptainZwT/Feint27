@@ -5,21 +5,24 @@
 			"name" : "The Surface",
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "3",
-			"standard_liquid_id" : "0"
+			"standard_liquid_id" : "0",
+			"region_class_id" : "0"
 		},
 		{
 			"id" : "1",
 			"name" : "The Underground",
 			"standard_block_id" : "0",
 			"standard_foilage_id" : "0",
-			"standard_liquid_id" : "0"
+			"standard_liquid_id" : "0",
+			"region_class_id" : "0"
 		},
 		{
 			"id" : "999",
 			"name" : "The Core",
 			"standard_block_id" : "2",
 			"standard_foilage_id" : "4",
-			"standard_liquid_id" : "1"
+			"standard_liquid_id" : "1",
+			"region_class_id" : "0"
 		}
 	]
 }

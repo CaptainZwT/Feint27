@@ -15,11 +15,15 @@ namespace Assets.Scripts.Information.Map
         public int standard_block_id;
         public int standard_foilage_id;
         public int standard_liquid_id;
+        public int region_class_id;
         public string name;
 
 
         // storage for information
         public float y_start, y_end;
+
+        public RegionClassification region_class;
+
         public Item standard_block;
         public Item standard_foilage;
         public Item standard_liquid;
@@ -32,13 +36,14 @@ namespace Assets.Scripts.Information.Map
         /// <param name="_std_block_id">ID of Standard Item</param>
         /// <param name="_std_foilage_id">ID of Standard Grass Item</param>
         /// <param name="_std_liq_id">ID of Standard Liquid</param>
-        public Region(int _id, string _name, int _std_block_id, int _std_foilage_id, int _std_liq_id)
+        public Region(int _id, string _name, int _std_block_id, int _std_foilage_id, int _std_liq_id, int _region_class_id)
         {
             id = _id;
             name = _name;
             standard_block_id = _std_block_id;
             standard_foilage_id = _std_foilage_id;
             standard_liquid_id = _std_liq_id;
+            region_class_id = _region_class_id;
         }
     }
 }

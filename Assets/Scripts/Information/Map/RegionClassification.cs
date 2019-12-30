@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Assets.Scripts.Information.Map
 {
     [Serializable]
-    class RegionClassification
+    public class RegionClassification
     {
         public int id;
         public string name;

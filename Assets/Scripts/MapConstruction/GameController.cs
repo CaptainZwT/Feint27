@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
             CurrentTerrain.Clear();
         }
 
-        CurrentTerrain = new World(knowledgebase, 300, 700, 0.1f);
+        CurrentTerrain = new World(knowledgebase, 500, 500);
 
     }
 

@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Knowledge_Base\KnowledgeBase.cs" />
     <Compile Include="Assets\Scripts\MapConstruction\GameController.cs" />
     <Compile Include="Assets\Scripts\MapConstruction\Tile.cs" />
+    <Compile Include="Assets\Scripts\MapConstruction\TileHolder.cs" />
     <Compile Include="Assets\Scripts\MapConstruction\World.cs" />
   </ItemGroup>
   <ItemGroup>

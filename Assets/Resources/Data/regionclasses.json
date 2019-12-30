@@ -1,0 +1,40 @@
+{
+	"Items" : [
+		{
+			"id" : "0",
+			"name" : "Caves"
+		},
+		{
+			"id" : "1",
+			"name" : "Crater filled w/ Water"
+		},
+		{
+			"id" : "2",
+			"name" : "Ocean"
+		},
+		{
+			"id" : "3",
+			"name" : "Standard"
+		},
+		{
+			"id" : "4",
+			"name" : "Vents"
+		},
+		{
+			"id" : "5",
+			"name" : "Lakes"
+		},
+		{
+			"id" : "6",
+			"name" : "Forest"
+		},
+		{
+			"id" : "7",
+			"name" : "Crater wo/ Water, Structure center"
+		},
+		{
+			"id" : "8",
+			"name" : "Crater w/ Water, Structure center"
+		}
+	]
+}

@@ -11,8 +11,9 @@ namespace Assets.Scripts
         private Item _item; // Holds the Item that will drop from this Tile
         private World _world; // Holds the World parent of this Tile
         public GameObject body; // Holds the GameObject this Tile is associated with
-        public Region home_region;
-        public Biome home_biome;
+
+        public Region home_region=null;
+        public Biome home_biome=null;
         //
 
 
