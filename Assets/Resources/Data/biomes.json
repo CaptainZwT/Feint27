@@ -6,7 +6,6 @@
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "4",
 			"standard_liquid_id" : "1",
-			"artifact_id" : "1",
 			"region_class_id" : "1"
 		},
 		{
@@ -15,7 +14,6 @@
 			"standard_block_id" : "2",
 			"standard_foilage_id" : "4",
 			"standard_liquid_id" : "1",
-			"artifact_id" : "4",
 			"region_class_id" : "2"
 		},
 		{
@@ -24,7 +22,6 @@
 			"standard_block_id" : "5",
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "3"
 		},
 		{
@@ -33,7 +30,6 @@
 			"standard_block_id" : "7",
 			"standard_foilage_id" : "7",
 			"standard_liquid_id" : "3",
-			"artifact_id" : "4",
 			"region_class_id" : "3"
 		},
 		{
@@ -42,7 +38,6 @@
 			"standard_block_id" : "5",
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "2"
 		},
 		{
@@ -51,7 +46,6 @@
 			"standard_block_id" : "7",
 			"standard_foilage_id" : "7",
 			"standard_liquid_id" : "2",
-			"artifact_id" : "4",
 			"region_class_id" : "2"
 		},
 		{
@@ -60,7 +54,6 @@
 			"standard_block_id" : "8",
 			"standard_foilage_id" : "8",
 			"standard_liquid_id" : "1",
-			"artifact_id" : "4",
 			"region_class_id" : "4"
 		},
 		{
@@ -69,7 +62,6 @@
 			"standard_block_id" : "8",
 			"standard_foilage_id" : "8",
 			"standard_liquid_id" : "1",
-			"artifact_id" : "4",
 			"region_class_id" : "5"
 		},
 		{
@@ -78,7 +70,6 @@
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "3",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "6"
 		},
 		{
@@ -87,7 +78,6 @@
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "3",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "7"
 		},
 		{
@@ -96,7 +86,6 @@
 			"standard_block_id" : "5",
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "8"
 		},
 		{
@@ -105,7 +94,6 @@
 			"standard_block_id" : "5",
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "7"
 		},
 		{
@@ -114,7 +102,6 @@
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "3",
 			"standard_liquid_id" : "3",
-			"artifact_id" : "4",
 			"region_class_id" : "7"
 		},
 		{
@@ -123,7 +110,6 @@
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "1",
 			"standard_liquid_id" : "0",
-			"artifact_id" : "4",
 			"region_class_id" : "7"
 		},
 		{
@@ -132,7 +118,6 @@
 			"standard_block_id" : "0",
 			"standard_foilage_id" : "8",
 			"standard_liquid_id" : "3",
-			"artifact_id" : "4",
 			"region_class_id" : "8"
 		}
 	]

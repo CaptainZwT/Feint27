@@ -60,7 +60,6 @@ namespace Assets.Scripts.Knowledge_Base
                 b.standard_foilage = items.Single(item => item.id == b.standard_foilage_id);
                 b.standard_liquid = liquids.Single(item => item.id == b.standard_liquid_id);
                 b.region_class = region_classes.Single(item => item.id == b.region_class_id);
-                b.artifact = items.Single(item => item.id == b.artifact_id);
                 b.region_class = region_classes.Single(item => item.id == b.region_class_id);
             }
         }
