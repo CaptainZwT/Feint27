@@ -10,7 +10,8 @@ namespace Assets.Scripts.Information.Map
     class Biome : Region
     {
         // characteristics
-        public int artifact_id;
+        public float top_occurance;
+        public float bottom_occurance;
 
         /*
          * Basalt w/ Lava Vents
@@ -24,36 +25,10 @@ namespace Assets.Scripts.Information.Map
          * Forge of the Fallen w/ Lava Forge in Center : Stone
         */
 
-        // storage for information
-        public float x_start,x_center,x_end;
-
-        public Item artifact; // Certain Item
-
-        /// <summary>
-        /// Initializes a Biome providing its Charateristics
-        /// </summary>
-        /// <param name="_id">ID</param>
-        /// <param name="_name">Name</param>
-        /// <param name="_std_block_id">ID of Standard Item</param>
-        /// <param name="_std_foilage_id">ID of Standard Grass Item</param>
-        /// <param name="_std_liq_id">ID of Standard Liquid</param>
-        /// <param name="_artifact_id">ID of Artifact Item</param>
-        public Biome(int _id, string _name, int _std_block_id, int _std_foilage_id, int _std_liq_id, int _artifact_id, int _region_class_id) : base(_id, _name, _std_block_id, _std_foilage_id, _std_liq_id, _region_class_id)
+        public Biome(int _id, string _name, int _stdBlockId, int _stdFoilageId, int _stdLiqId, int _regionClassId, float _topOccurance, float _bottomOccurance) : base(_id, _name, _stdBlockId, _stdFoilageId, _stdLiqId, _regionClassId)
         {
-            artifact_id = _artifact_id;
-        }
-
-        /// <summary>
-        /// Initializes a Biome's location on a map
-        /// </summary>
-        /// <param name="start_pos">Start position to pull co-ordinates from.</param>
-        /// <param name="end_pos">End position to pull co-ordinates from.</param>
-        public void SetLocation(Vector3 start_pos, Vector3 end_pos)
-        {
-            x_start = start_pos.x;
-            y_start = start_pos.y;
-            x_end = end_pos.x;
-            y_end = end_pos.y;
+            top_occurance = _topOccurance;
+            bottom_occurance = _bottomOccurance;
         }
 
     }

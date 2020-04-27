@@ -21,7 +21,6 @@ namespace Assets.Scripts.Knowledge_Base
         // Region information
         public Region[] regions;
         public Biome[] biomes;
-        public RegionClassification[] region_classes;
 
 
         public KnowledgeBase()
@@ -35,32 +34,28 @@ namespace Assets.Scripts.Knowledge_Base
             jsonString = Resources.Load<TextAsset>(datapath + "Items/liquids").ToString();
             liquids = JsonHelper.FromJson<Liquid>(jsonString);
 
-            // loading region classification information
-            jsonString = Resources.Load<TextAsset>(datapath + "regionclasses").ToString();
-            region_classes = JsonHelper.FromJson<RegionClassification>(jsonString);
-
             // loading region information
             jsonString = Resources.Load<TextAsset>(datapath + "regions").ToString();
             regions = JsonHelper.FromJson<Region>(jsonString);
-            // loading region specific Items
+            // loading region specific references
             foreach(Region r in regions)
             {
                 r.standard_block = items.Single(item => item.id == r.standard_block_id);
                 r.standard_foilage = items.Single(item => item.id == r.standard_foilage_id);
                 r.standard_liquid = liquids.Single(item => item.id == r.standard_liquid_id);
-                r.region_class = region_classes.Single(item => item.id == r.region_class_id);
             }
             // loading biome information
             jsonString = Resources.Load<TextAsset>(datapath + "biomes").ToString();
             biomes = JsonHelper.FromJson<Biome>(jsonString);
-            // loading biome specific Items
+            // loading biome specific references and fixing occurance
             foreach (Biome b in biomes)
             {
                 b.standard_block = items.Single(item => item.id == b.standard_block_id);
                 b.standard_foilage = items.Single(item => item.id == b.standard_foilage_id);
                 b.standard_liquid = liquids.Single(item => item.id == b.standard_liquid_id);
-                b.region_class = region_classes.Single(item => item.id == b.region_class_id);
-                b.region_class = region_classes.Single(item => item.id == b.region_class_id);
+                // occurance corrected
+                b.top_occurance = ((float)b.top_occurance / 100f);
+                b.bottom_occurance = ((float)b.bottom_occurance / 100f);
             }
         }
     }

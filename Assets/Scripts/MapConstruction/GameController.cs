@@ -17,10 +17,10 @@ public class GameController : MonoBehaviour
 
         if (CurrentTerrain != null)
         {
-            CurrentTerrain.Clear();
+            //CurrentTerrain.Clear();
         }
 
-        CurrentTerrain = new World(knowledgebase, 500, 500);
+        CurrentTerrain = new World(300, 300, knowledgebase, gameObject);
 
     }
 

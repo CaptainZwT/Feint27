@@ -20,10 +20,6 @@ namespace Assets.Scripts.Information.Map
 
 
         // storage for information
-        public float y_start, y_end;
-
-        public RegionClassification region_class;
-
         public Item standard_block;
         public Item standard_foilage;
         public Item standard_liquid;

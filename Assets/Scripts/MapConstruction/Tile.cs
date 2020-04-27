@@ -12,8 +12,10 @@ namespace Assets.Scripts
         private World _world; // Holds the World parent of this Tile
         public GameObject body; // Holds the GameObject this Tile is associated with
 
-        public Region home_region=null;
-        public Biome home_biome=null;
+        public Region home_region;
+        public Biome home_biome;
+
+        public Vector2 position;
         //
 
 
@@ -22,17 +24,13 @@ namespace Assets.Scripts
         /// </summary>
         /// <param name="pos">Position</param>
         /// <param name="parent">Parent</param>
-        public Tile(Vector3 pos, World parent)
+        public Tile(Vector2 pos, World parent)
         {
-            // Creating initial Object
-            body = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            // Setting Dimensions
-            body.transform.localScale = new Vector3(1, 1, 1);
-            // Setting Position
-            body.transform.position = pos;
-            // Setting World to be its parent
+            home_biome = null;
+            home_region = null;
+
+            position = pos;
             _world = parent;
-            body.transform.parent = _world.WorldObject.transform;
         }
 
         /// <summary>
@@ -42,17 +40,41 @@ namespace Assets.Scripts
         public void SetItem(Item item)
         {
             _item = item;
-
-            //Get the Renderer component from the new cube
-            var cubeRenderer = body.GetComponent<Renderer>();
-
-            //Call SetColor using the shader property name "_Color" and setting the color to red
-            cubeRenderer.material.SetColor("_Color", item.tilecolor);
         }
 
         public Item GetItem()
         {
             return _item;
+        }
+
+        public void Render()
+        {
+            // Checking for defaul tiles
+            if (_item == null)
+            {
+                if (home_biome != null)
+                {
+                    _item = home_biome.standard_block;
+                }
+                else
+                {
+                    _item = home_region.standard_block;
+                }
+            }
+
+            // Creating initial Object
+            body = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            // Setting Dimensions
+            body.transform.localScale = new Vector3(1, 1, 0.1f);
+            // Setting Position and Parent
+            body.transform.position = position;
+            body.transform.parent = _world.WorldObject.transform;
+
+            //Get the Renderer component from the new cube
+            var cubeRenderer = body.GetComponent<Renderer>();
+
+            //Call SetColor using the shader property name "_Color" and setting the color to red
+            cubeRenderer.material.SetColor("_Color", _item.tilecolor);
         }
 
     }

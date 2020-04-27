@@ -60,15 +60,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Character\Character.cs" />
-    <Compile Include="Assets\Scripts\Character\CharacterControl.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\Inventory.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\Journal\Journal.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\Journal\Map.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\Journal\QuestLog.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\NPC\Dialogue.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\NPC\Shop.cs" />
-    <Compile Include="Assets\Scripts\Character\Parts\Pouch.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Character.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\CharacterControl.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\NPC.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\Journal\Journal.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\Journal\Map.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\Journal\QuestLog.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\NPC\Dialogue.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\NPC\Shop.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Parts\Pouch.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\Player.cs" />
     <Compile Include="Assets\Scripts\Helpers\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\Information\Events\Event.cs" />
     <Compile Include="Assets\Scripts\Information\Items\Consumable.cs" />
@@ -78,13 +81,11 @@
     <Compile Include="Assets\Scripts\Information\Items\Tool.cs" />
     <Compile Include="Assets\Scripts\Information\Map\Biome.cs" />
     <Compile Include="Assets\Scripts\Information\Map\Region.cs" />
-    <Compile Include="Assets\Scripts\Information\Map\RegionClassification.cs" />
     <Compile Include="Assets\Scripts\Information\Quests\Quest.cs" />
     <Compile Include="Assets\Scripts\Information\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Knowledge_Base\KnowledgeBase.cs" />
     <Compile Include="Assets\Scripts\MapConstruction\GameController.cs" />
     <Compile Include="Assets\Scripts\MapConstruction\Tile.cs" />
-    <Compile Include="Assets\Scripts\MapConstruction\TileHolder.cs" />
     <Compile Include="Assets\Scripts\MapConstruction\World.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -2,123 +2,73 @@
 	"Items" : [
 		{
 			"id" : "0",
-			"name" : "Geyser",
-			"standard_block_id" : "1",
-			"standard_foilage_id" : "4",
-			"standard_liquid_id" : "1",
-			"region_class_id" : "1"
+			"name" : "Taiga",
+			"standard_block_id" : "7",
+			"standard_foilage_id" : "14",
+			"standard_liquid_id" : "0",
+			"region_class_id" : "3",
+			"top_occurance" : "15",
+			"bottom_occurance" : "0"
 		},
 		{
 			"id" : "1",
-			"name" : "Molten Core",
-			"standard_block_id" : "2",
+			"name" : "Basalt w/ Lava",
+			"standard_block_id" : "8",
 			"standard_foilage_id" : "4",
 			"standard_liquid_id" : "1",
-			"region_class_id" : "2"
+			"region_class_id" : "5",
+			"top_occurance" : "0",
+			"bottom_occurance" : "35"
 		},
 		{
 			"id" : "2",
-			"name" : "Sandy Shore",
-			"standard_block_id" : "5",
-			"standard_foilage_id" : "5",
-			"standard_liquid_id" : "0",
-			"region_class_id" : "3"
-		},
-		{
-			"id" : "3",
-			"name" : "Taiga",
-			"standard_block_id" : "7",
-			"standard_foilage_id" : "7",
-			"standard_liquid_id" : "3",
-			"region_class_id" : "3"
-		},
-		{
-			"id" : "4",
-			"name" : "Warm Ocean",
-			"standard_block_id" : "5",
-			"standard_foilage_id" : "5",
-			"standard_liquid_id" : "0",
-			"region_class_id" : "2"
-		},
-		{
-			"id" : "5",
-			"name" : "Cold Ocean",
-			"standard_block_id" : "7",
-			"standard_foilage_id" : "7",
-			"standard_liquid_id" : "2",
-			"region_class_id" : "2"
-		},
-		{
-			"id" : "6",
-			"name" : "Basalt w/ Lava Vents",
-			"standard_block_id" : "8",
-			"standard_foilage_id" : "8",
-			"standard_liquid_id" : "1",
-			"region_class_id" : "4"
-		},
-		{
-			"id" : "7",
-			"name" : "Basalt w/ Lava Lakes",
-			"standard_block_id" : "8",
-			"standard_foilage_id" : "8",
-			"standard_liquid_id" : "1",
-			"region_class_id" : "5"
-		},
-		{
-			"id" : "8",
 			"name" : "Evergreen Forest",
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "3",
 			"standard_liquid_id" : "0",
-			"region_class_id" : "6"
+			"region_class_id" : "6",
+			"top_occurance" : "30",
+			"bottom_occurance" : "0"
 		},
 		{
-			"id" : "9",
-			"name" : "Knight's Castle",
-			"standard_block_id" : "1",
-			"standard_foilage_id" : "3",
-			"standard_liquid_id" : "0",
-			"region_class_id" : "7"
-		},
-		{
-			"id" : "10",
-			"name" : "Pirates' Cove",
+			"id" : "3",
+			"name" : "Sandy Dunes",
 			"standard_block_id" : "5",
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
-			"region_class_id" : "8"
+			"region_class_id" : "7",
+			"top_occurance" : "20",
+			"bottom_occurance" : "0"
 		},
 		{
-			"id" : "11",
-			"name" : "Lost Pyramid",
-			"standard_block_id" : "5",
-			"standard_foilage_id" : "5",
-			"standard_liquid_id" : "0",
-			"region_class_id" : "7"
+			"id" : "4",
+			"name" : "Forge",
+			"standard_block_id" : "9",
+			"standard_foilage_id" : "4",
+			"standard_liquid_id" : "2",
+			"region_class_id" : "8",
+			"top_occurance" : "0",
+			"bottom_occurance" : "30"
 		},
 		{
-			"id" : "12",
-			"name" : "Ancient Aliens?",
-			"standard_block_id" : "1",
-			"standard_foilage_id" : "3",
-			"standard_liquid_id" : "3",
-			"region_class_id" : "7"
+			"id" : "5",
+			"name" : "Molten Core",
+			"standard_block_id" : "2",
+			"standard_foilage_id" : "4",
+			"standard_liquid_id" : "1",
+			"region_class_id" : "8",
+			"top_occurance" : "0",
+			"bottom_occurance" : "15"
 		},
 		{
-			"id" : "13",
-			"name" : "Lost Trex",
-			"standard_block_id" : "1",
-			"standard_foilage_id" : "1",
-			"standard_liquid_id" : "0",
-			"region_class_id" : "7"
-		},
-		{
-			"id" : "14",
-			"name" : "Forge of the Fallen",
+			"id" : "6",
+			"name" : "Caves",
 			"standard_block_id" : "0",
-			"standard_foilage_id" : "8",
-			"standard_liquid_id" : "3",
-			"region_class_id" : "8"
+			"standard_foilage_id" : "3",
+			"standard_liquid_id" : "0",
+			"region_class_id" : "8",
+			"top_occurance" : "0",
+			"bottom_occurance" : "0"
 		}
 	]
 }

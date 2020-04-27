@@ -1,281 +1,364 @@
-﻿using Assets.Scripts.Information.Items;
-using Assets.Scripts.Information.Map;
+﻿using Assets.Scripts.Information.Map;
 using Assets.Scripts.Knowledge_Base;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.MapConstruction
 {
     class World
     {
+
         // Charateristics
-        private int width;
-        private int height;
-        private float scale;
-        private int octaves;
+        private int width, height;
+        private float amplitude, frequency, offset;
+        private float caving;
+
         public GameObject WorldObject;
         private KnowledgeBase knowledgebase;
+        private Dictionary<Vector2, float> MapGraph;
+        private Dictionary<Vector2, Tile> MapTiles;
 
-        // Setting variables for Map construction
-        private float skyheight = 0.95f;
-        private float voidheight = 0.03f;
+
         // Displacement is a variable that determines how sharp biomes and regions change.
-        private int displacement = 2;
+        private int displacement = 3;
+
         // region height paramaters
-        private float surfaceheight = 0.9f;
-        private float hellheight = 0.1f;
+        private float skyheight = 0.95f;
+        private float surfaceheight = 0.6f;
+        private float coreheight = 0.02f;
 
-        // placeholders for information used in the World generating process
-        private Dictionary<Vector3, float> CoordinateGraph;
-        private Dictionary<Vector3, TileHolder> TileMapping;
-        private Dictionary<Vector3, Tile> Tiles;
+        // normal debugging
+        private bool debugging =  true;
 
-        /// <summary>
-        /// Initializing World : Its Characteristics and Terrain
-        /// </summary>
-        /// <param name="width">Width</param>
-        /// <param name="height">Height</param>
-        /// <param name="scale">Scale</param>
-        /// <param name="octaves">Octaves</param>
-        public World(KnowledgeBase _kb, int _width, int _height, float _scale = 0.1f, int _octaves = 3)
+        // Public functions
+        public World(int _width, int _height, KnowledgeBase _kb, GameObject _obj)
         {
-            // initializing World's characteristics
+            // setting variables
             width = _width;
             height = _height;
-            scale = _scale;
-            octaves = _octaves;
+            knowledgebase = _kb;
+            WorldObject = _obj;
 
-            // Creating the coordinate Graph to use for Building the World
-            AssignLocations(_kb);
-            // Building the World using the CoordinateGraph generated in the previous function
-            BuildWorld(_kb);
+            amplitude = 14f;
+            frequency = 2f;
+            caving = 0.5f;
+            offset = Random.Range(5, 50);
+
+            // initializing variables
+            MapGraph = new Dictionary<Vector2, float>();
+            MapTiles = new Dictionary<Vector2, Tile>();
+
+
+            // creating functions
+            BuildGraph();
+
+            BuildTerrain();
+
+            BuildBiomes();
+
+            GrowFoilage();
+
+            //BuildOres();
+
+            FillLiquids();
+
+            RenderWorld();
         }
 
-        /// <summary>
-        /// Function that when called generates this class's Coordinate Graph (Vector3 position to Float noise).
-        /// </summary>
-        private void AssignLocations(KnowledgeBase kb)
+        // Private functions
+        private void BuildGraph()
         {
-            // initialzing variables
-            CoordinateGraph = new Dictionary<Vector3, float>();
-            TileMapping = new Dictionary<Vector3, TileHolder>();
-            float offset = Random.Range(0f, 10000f); // This controls why maps look different each time, it's a different location on the generated perlin map.
 
-            // Generating the Noise and Coordinate Map
-            for (int x = 1; x < width; x++)
+            // building graph
+            for (int x = 0; x < width; x++)
             {
-                for (int y = 1; y < height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    Vector3 newpos = new Vector3(x, y, 0);
+                    Vector2 pos = new Vector2(x, y);
 
-                    float CompleteNoise = 0;
+                    // Setting the Coord using scale for our PerlinNoise
+                    float xCoord = ((float)x / (width)) * (amplitude);
+                    float yCoord = ((float)y / (height)) * (amplitude);
 
-                    for (int o = 0; o < octaves; o++)
-                    {
-                        float xCoord = x * scale;
-                        float yCoord = y * scale;
-                        float Noise = Mathf.PerlinNoise(xCoord + offset, yCoord + offset);
-                        CompleteNoise += Noise;
-                    }
+                    // Creating Noise based on the number of octaves
+                    float Noise = Mathf.PerlinNoise(xCoord + offset, yCoord + offset);
 
-                    CoordinateGraph.Add(newpos, CompleteNoise);
-                }
-            }
+                    //xCoord = ((float)x / (8*frequency)) * (amplitude);
+                    //yCoord = ((float)y / (8*frequency)) * (amplitude);
 
-            foreach(Vector3 pos in CoordinateGraph.Keys)
-            {
-                TileHolder tile = new TileHolder();
-                TileMapping.Add(pos, tile);
+                    //Noise += Mathf.PerlinNoise(xCoord, yCoord);
 
-                // Setting Surface Region
-                if ((pos.y >= height * surfaceheight + Random.Range(-displacement, displacement)))
-                {
-                    tile.home_region = kb.regions.Single(item => item.id == 0);
+                    //Debug.Log(Noise);
 
-                    // Identifying Biomes
-                    if (pos.x >= (width * 0.8) + Random.Range(-displacement, displacement))
-                    {
-                        if (pos.x >= (width * 0.87) + Random.Range(-displacement, displacement))
-                        {
-                            // Warm Ocean Biome
-                            tile.home_biome = kb.biomes.Single(item => item.id == 4);
-                        }
-                        else
-                        {
-                            // Sandy Shore Biome
-                            tile.home_biome = kb.biomes.Single(item => item.id == 2);
-                        }
-                    }
-                    else if (pos.x <= (width * 0.2) + Random.Range(-displacement, displacement))
-                    {
-                        if (pos.x <= (width * 0.1) + Random.Range(-displacement, displacement))
-                        {
-                            // Cold Ocean Biome
-                            tile.home_biome = kb.biomes.Single(item => item.id == 5);
-                        }
-                        else
-                        {
-                            // Taiga Biome
-                            tile.home_biome = kb.biomes.Single(item => item.id == 3);
-                        }
-                    }
-                }
-                // Setting Core Region
-                else if ((pos.y <= height * hellheight + Random.Range(-displacement, displacement)))
-                {
-                    tile.home_region = kb.regions.Single(item => item.id == 999);
-
-                    // Identifying Biomes
-                    if (pos.y <= height * voidheight)
-                    {
-                        // Molten Core Biome
-                        tile.home_biome = kb.biomes.Single(item => item.id == 1);
-                    }
-                }
-                else // Setting Underground Region
-                {
-                    tile.home_region = kb.regions.Single(item => item.id == 1);
+                    // Assigning it to the noise position in the graph
+                    MapGraph.Add(pos, Noise);
                 }
             }
         }
 
-        /// <summary>
-        /// Function that when called uses this class's Coordinate Graph to generate the terrain of this World.
-        /// </summary>
-        private void BuildWorld(KnowledgeBase kb)
+        private void BuildTerrain()
         {
-            // Initializing variables
-            WorldObject = new GameObject();
-            Tiles = new Dictionary<Vector3, Tile>();
 
-            // Initial loop placing initial landmass down, and assigning tiles to biomes and regions
-            foreach (Vector3 pos in CoordinateGraph.Keys)
+            // building world
+            foreach (Vector2 pos in MapGraph.Keys)
             {
                 // initializing variables
-                float tile_noise = CoordinateGraph[pos];
-                
+                float Noise = MapGraph[pos];
+
                 // Conditional for when a Tile shouldn't exist in this position
-                if (pos.y >= height*skyheight)
+                if ( (pos.y >= height * skyheight) || (Noise > caving) )
                 {
-                    continue;
+                    continue; 
                 }
 
-                TileHolder tileholder = TileMapping[pos];
-
-                // Checking if Tile is not part of a Cave
-                if ((tileholder.home_biome == null && tileholder.home_region.region_class_id == 0 && tile_noise < 0.9) ||
-                    (tileholder.home_biome!=null && tileholder.home_biome.region_class_id==0 && tile_noise < 0.9))
-                {
-                    continue;
-                }
-
+                // initializing tile and its characteristics
                 Tile tile = new Tile(pos, this);
-                tile.home_region = TileMapping[pos].home_region;
-                tile.home_biome = TileMapping[pos].home_biome;
-                Tiles.Add(pos, tile);
-            }
 
-            // Setting Base Tile(Item) and Foilage
-            foreach(Vector3 pos in Tiles.Keys)
-            {
-                Tile tile = Tiles[pos];
-                // If a tile has no home region or biome, no need to go through this loop which decorates the various tiles based on those factors.
-                if (tile.home_region==null && tile.home_biome==null)
+                // Setting up region of the Tile
+                if (pos.y > height * surfaceheight)
                 {
-                    continue;
+                    tile.home_region = knowledgebase.regions.Single(item => item.id == 1);
+                }
+                else
+                {
+                    tile.home_region = knowledgebase.regions.Single(item => item.id == 1);
                 }
 
-                var home_region = (tile.home_biome != null ? tile.home_biome : tile.home_region);
-                var region_class = home_region.region_class;
-
-                // Region Classification Rules
-                if (region_class.id == 1) // Crater Class
-                {
-                    // Within Crater
-                    if (System.Math.Abs(tile.body.transform.position.x - (width*0.01)) < (width * 0.02))
-                    {
-                        tile.SetItem(home_region.standard_liquid);
-                    }
-                    else // Outside of Crater
-                    {
-                        tile.SetItem(home_region.standard_block);
-                    }
-                }
-                else if (region_class.id == 2) // Ocean Class
-                {
-                    // Placing the Ocean Bed
-                    if (Math.Abs(pos.y - height * surfaceheight + Random.Range(-displacement, displacement)) < (height*0.01))
-                    {
-                        tile.SetItem(home_region.standard_block);
-                    }
-                    // Placing the Ocean
-                    else {
-                        tile.SetItem(home_region.standard_liquid);
-                    }
-                }
-                else if (region_class.id == 3) // Beach Class
-                {
-                    // Orientating the Beach/Ocean
-                    tile.SetItem(home_region.standard_block);
-                }
-                else // Standard Class
-                {
-                    tile.SetItem(home_region.standard_block);
-                }
-
-                // Foilage Rule
-                // Checking if our Map has a tile associated with the above position, and if so, that it has no tile generated associated with it.
-                Vector3 abovepos = new Vector3(tile.body.transform.position.x, tile.body.transform.position.y + 1, tile.body.transform.position.z);
-                if (home_region.standard_block != home_region.standard_foilage && CoordinateGraph.ContainsKey(abovepos) && !Tiles.ContainsKey(abovepos))
-                {
-                    SpreadFoilage(home_region.standard_foilage, tile);
-                }
+                // Add tile to List
+                MapTiles.Add(pos, tile);
             }
         }
 
-        /// <summary>
-        /// Helper function for flaura that recursively calls the initial block to be changed to specific Flaura Item,
-        /// and if dice rolls succeeds, spreads to the tile below it.
-        /// </summary>
-        /// <param name="foilage">Foilage Item</param>
-        /// <param name="tile">Tile to spread to/from</param>
-        /// <param name="odds">Odds of spreading</param>
-        private int SpreadFoilage(Item foilage, Tile tile, float odds = 100)
+        private void BuildBiomes()
         {
-            if (tile.GetItem() is Liquid) { return 0;  }
-            // Initializing variables
-            Vector3 pos = tile.body.transform.position;
 
-            // Set the Tile to Flaura
-            tile.SetItem(foilage);
-
-            if (Random.Range(1f, 100f) <= odds) // Roll a dice based on odds, on success spread
+            foreach (Biome b in knowledgebase.biomes.ToList())
             {
-                // Get position of tile below current one
-                Vector3 belowpos = new Vector3(pos.x, pos.y - 1, pos.z);
-                // Checking if there is a tile in our world located just below this tile.
-                // Then checking that the tile to spread to is in the same biome/region as the original.
-                if (CoordinateGraph.ContainsKey(belowpos) && Tiles.ContainsKey(belowpos) && Tiles[belowpos]!=null && Tiles[belowpos].home_region==tile.home_region && Tiles[belowpos].home_biome == tile.home_biome)
+                int tiles = BuildBiome(b);
+                if (debugging)
                 {
-                    // Spread the foilage, but with reduced odds of spreading
-                    SpreadFoilage(foilage, Tiles[belowpos], odds -= 10);
+                    Debug.Log(tiles + " " + b.name + " tiles created.");
                 }
             }
 
-            return 1;
+            int basetiles = 0;
+
+            foreach (Tile tile in MapTiles.Values)
+            {
+                if (tile.home_biome == null)
+                {
+                    if (tile.position.y >= ((height * surfaceheight)))
+                    {
+                        tile.home_biome = knowledgebase.biomes.Single(item => item.id == 2);
+                        basetiles++;
+                    }
+                    else
+                    {
+                        tile.home_biome = knowledgebase.biomes.Single(item => item.id == 6);
+                        basetiles++;
+                    }
+                }
+            }
+
+            if (debugging)
+            {
+                Debug.Log(basetiles + " base biome tiles created.");
+            }
         }
 
-        /// <summary>
-        /// Function that when called clears the current terrain
-        /// </summary>
-        public void Clear()
+        private int BuildBiome(Biome biome)
         {
-            // Deletes the Map
-            Object.Destroy(WorldObject);
+            float b_amp = 4f, b_offset = Random.Range(0, 99999);
+            float freq = 4f;
+            int tiles = 0;
+
+            // building biomes
+            foreach (Tile tile in MapTiles.Values)
+            {
+                Vector2 pos = tile.position;
+
+                float xCoord = ((float)pos.x / width);
+                float yCoord = ((float)pos.y / height);
+
+                // Setting the Coord using scale for our PerlinNoise
+                float xNoise = (xCoord / (freq / 2) * (b_amp * 2));
+                float yNoise = (yCoord / (freq / 2) * (b_amp * 2));
+
+                // Creating Noise based on the number of octaves
+                float Noise = Mathf.PerlinNoise(xNoise + b_offset, yNoise + b_offset);
+
+                xNoise = (xCoord / (freq * 2)) * (b_amp / 2);
+                yNoise = (yCoord / (freq * 2)) * (b_amp / 2);
+
+                // Creating Noise based on the number of octaves
+                Noise += Mathf.PerlinNoise(xNoise + b_offset, yNoise + b_offset);
+
+                if (tile.home_biome == null)
+                {
+                    if (tile.position.y >= ((height * surfaceheight)))
+                    {
+                        if (Noise <= ( 0.6f + biome.top_occurance) && (biome.top_occurance>0))
+                        {
+                            tile.home_biome = biome;
+                            tiles++;
+                        }
+                    }
+                    else if (Noise <= (0.6f + biome.bottom_occurance) && (biome.bottom_occurance > 0))
+                    {
+                        tile.home_biome = biome;
+                        tiles++;
+                    }
+                }
+            }
+
+            return tiles;
         }
+
+        private void BuildOres()
+        {
+            float b_amp = 10f, b_offset = Random.Range(0, 99999);
+            float b_freq = 5f;
+
+            int ores_created = 0, wave;
+
+            // building biomes
+            foreach (Tile tile in MapTiles.Values)
+            {
+                Vector2 pos = tile.position;
+                wave = 5;
+
+                // Setting the Coord using scale for our PerlinNoise
+                float xCoord = ((float)pos.x / (b_freq / wave)) * (b_amp * wave);
+                float yCoord = ((float)pos.y / (b_freq / wave)) * (b_amp * wave);
+
+                // Creating Noise based on the number of octaves
+                float Noise = Mathf.PerlinNoise(xCoord + b_offset, yCoord + b_offset);
+
+                wave = 2;
+
+                xCoord = ((float)pos.x / (b_freq * wave)) * (b_amp / wave);
+                yCoord = ((float)pos.y / (b_freq * wave)) * (b_amp / wave);
+
+                // Creating Noise based on the number of octaves
+                Noise += Mathf.PerlinNoise(xCoord + b_offset, yCoord + b_offset);
+
+                //Debug.Log(Noise);
+
+                if (tile.position.y < ((height * skyheight)-10) )
+                {
+                    if (Noise > 1.2)
+                    {
+                        float dice_roll = Random.Range(1f, 100f);
+
+                        if (pos.y >= (height * surfaceheight) / 2)
+                        {
+                            if (dice_roll < 50)
+                            {
+                                tile.SetItem(knowledgebase.items.Single(item => item.id == 9)); // Iron
+                            }
+                            else
+                            {
+                                tile.SetItem(knowledgebase.items.Single(item => item.id == 10)); // Tin
+                            }
+                        }
+                        else
+                        {
+                            if (dice_roll < 40)
+                            {
+                                tile.SetItem(knowledgebase.items.Single(item => item.id == 9)); // Iron
+                            }
+                            else
+                            {
+                                tile.SetItem(knowledgebase.items.Single(item => item.id == 13)); // Emerald
+                            }
+                        }
+
+                        ores_created++;
+                    }
+                }
+            }
+
+            if (debugging)
+            {
+                Debug.Log(ores_created + " ore blocks created.");
+            }
+        }
+
+        private void FillLiquids()
+        {
+            foreach (Vector2 pos in MapGraph.Keys)
+            {
+                if ( (pos.y <= height*coreheight) && (MapGraph[pos] > caving) )
+                {
+                    Tile newtile = new Tile(pos, this);
+
+                    newtile.SetItem(knowledgebase.liquids.Single(item => item.id == 2));
+
+                    MapTiles.Add(pos, newtile);
+                }
+            }
+            
+        }
+
+        private void GrowFoilage()
+        {
+            foreach (Tile tile in MapTiles.Values)
+            {
+                // Check for Grass
+                CheckGrass(tile);
+            }
+        }
+
+        private void RenderWorld()
+        {
+            foreach (Tile tile in MapTiles.Values)
+            { 
+
+                // Finally, Render Tiles
+                tile.Render();
+            }
+        }
+
+        /* helper functions */
+
+
+        private void CheckGrass(Tile tile)
+        {
+            Vector2 poscheck = new Vector2(tile.position.x, tile.position.y + 1);
+
+            if (!MapTiles.ContainsKey(poscheck))
+            {
+                GrowGrass(tile);
+            }
+        }
+
+        private void GrowGrass(Tile tile, int odds = 100)
+        {
+
+            // Grow Grass
+            if (tile.home_biome != null)
+            {
+                tile.SetItem(tile.home_biome.standard_foilage);
+            }
+            else
+            {
+                tile.SetItem(tile.home_region.standard_foilage);
+            }
+
+
+            if (odds >= 50)
+            {
+                // Spread it below
+                Vector2 spreadCheck = new Vector2(tile.position.x, tile.position.y - 1);
+
+                if (MapTiles.ContainsKey(spreadCheck) && tile.home_biome == MapTiles[spreadCheck].home_biome)
+                {
+                    GrowGrass(MapTiles[spreadCheck], odds - Random.Range(10, 40));
+                }
+            }
+        }
+
     }
 }
