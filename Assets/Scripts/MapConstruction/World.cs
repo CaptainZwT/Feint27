@@ -12,17 +12,14 @@ namespace Assets.Scripts.MapConstruction
 
         // Charateristics
         private int width, height;
-        private float amplitude, frequency, offset;
+        private float amplitude, offset;
         private float caving;
 
         public GameObject WorldObject;
         private KnowledgeBase knowledgebase;
         private Dictionary<Vector2, float> MapGraph;
         private Dictionary<Vector2, Tile> MapTiles;
-
-
-        // Displacement is a variable that determines how sharp biomes and regions change.
-        private int displacement = 3;
+        private Dictionary<Vector2, Tile> StructureTiles;
 
         // region height paramaters
         private float skyheight = 0.95f;
@@ -42,14 +39,13 @@ namespace Assets.Scripts.MapConstruction
             WorldObject = _obj;
 
             amplitude = 14f;
-            frequency = 2f;
             caving = 0.5f;
             offset = Random.Range(5, 50);
 
             // initializing variables
             MapGraph = new Dictionary<Vector2, float>();
             MapTiles = new Dictionary<Vector2, Tile>();
-
+            StructureTiles = new Dictionary<Vector2, Tile>();
 
             // creating functions
             BuildGraph();
@@ -315,8 +311,11 @@ namespace Assets.Scripts.MapConstruction
         {
             foreach (Tile tile in MapTiles.Values)
             { 
+                tile.Render();
+            }
 
-                // Finally, Render Tiles
+            foreach (Tile tile in StructureTiles.Values)
+            {
                 tile.Render();
             }
         }
@@ -331,8 +330,62 @@ namespace Assets.Scripts.MapConstruction
             if (!MapTiles.ContainsKey(poscheck))
             {
                 GrowGrass(tile);
+                if (tile.home_biome.standard_foilage_id == 3)
+                {
+                    CheckStructure(0, tile.position);
+                }
+                else if (tile.home_biome.standard_foilage_id == 5)
+                {
+                    CheckStructure(1, tile.position);
+                }
+                else if (tile.home_biome.standard_foilage_id == 7)
+                {
+                    CheckStructure(2, tile.position);
+                }
             }
         }
+
+        private void CheckStructure(int strucid, Vector2 startpos)
+        {
+            Structure struc = translateStruc(strucid, startpos);
+
+            bool canbuild = true;
+
+            foreach (Vector2 pos in struc.spacechecks)
+            {
+                if ((!(MapGraph.Keys.Contains(pos)) || MapTiles.Keys.Contains(pos) || StructureTiles.Keys.Contains(pos)) && canbuild) {
+                    canbuild = false;
+                }
+            }
+
+            foreach (Vector2[] array in struc.pos_array)
+            {
+                foreach (Vector2 pos in array)
+                {
+                    if ((!(MapGraph.Keys.Contains(pos)) || MapTiles.Keys.Contains(pos) || StructureTiles.Keys.Contains(pos)) && canbuild)
+                    {
+                        canbuild = false;
+                    }
+                }
+            }
+
+            if (canbuild)
+            {
+                for (int i = 0; i < struc.Itemids.Length; i++)
+                {
+                    foreach (Vector2 pos in struc.pos_array[i])
+                    {
+                        Tile newtile = new Tile(pos, this);
+
+                        newtile.SetItem(knowledgebase.items.Single(item => item.id == struc.Itemids[i]));
+
+                        StructureTiles.Add(pos, newtile);
+                    }
+                }
+            }
+        }
+
+        /* tier 2 helper functions */
 
         private void GrowGrass(Tile tile, int odds = 100)
         {
@@ -359,6 +412,21 @@ namespace Assets.Scripts.MapConstruction
                 }
             }
         }
+
+        private Structure translateStruc(int strucid, Vector2 startpos)
+        {
+            switch (strucid)
+            {
+                case 0: // evergreen tree
+                    return knowledgebase.strucLoader.getTree(startpos);
+                case 1: // cactus
+                    return knowledgebase.strucLoader.getCactus(startpos);
+                default: // no structure found
+                    return null;
+            }
+        }
+
+        
 
     }
 }

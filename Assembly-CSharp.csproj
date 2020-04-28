@@ -81,6 +81,8 @@
     <Compile Include="Assets\Scripts\Information\Items\Tool.cs" />
     <Compile Include="Assets\Scripts\Information\Map\Biome.cs" />
     <Compile Include="Assets\Scripts\Information\Map\Region.cs" />
+    <Compile Include="Assets\Scripts\Information\Map\Structure.cs" />
+    <Compile Include="Assets\Scripts\Information\Map\StructureLoader.cs" />
     <Compile Include="Assets\Scripts\Information\Quests\Quest.cs" />
     <Compile Include="Assets\Scripts\Information\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Knowledge_Base\KnowledgeBase.cs" />
