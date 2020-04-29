@@ -107,6 +107,84 @@ namespace Assets.Scripts.Information.Map
             return tree;
         }
 
+        public Structure getPyramid(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                18, 17, 19
+            };
+
+            Vector2[] check =
+            {
+
+               new Vector2(startpos.x  , startpos.y+2),
+               new Vector2(startpos.x+1, startpos.y+2),
+               new Vector2(startpos.x-1, startpos.y+2),
+
+               new Vector2(startpos.x, startpos.y+6),
+            };
+
+            Vector2[] baseblk =
+            {
+                new Vector2(startpos.x+1, startpos.y+1),
+                new Vector2(startpos.x+2, startpos.y+1),
+                new Vector2(startpos.x+3, startpos.y+1),
+                new Vector2(startpos.x+4, startpos.y+1),
+                new Vector2(startpos.x-1, startpos.y+1),
+                new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
+                new Vector2(startpos.x-4, startpos.y+1),
+
+                new Vector2(startpos.x+2, startpos.y+2),
+                new Vector2(startpos.x-2, startpos.y+2),
+                new Vector2(startpos.x+3, startpos.y+2),
+                new Vector2(startpos.x-3, startpos.y+2),
+
+                new Vector2(startpos.x+1, startpos.y+3),
+                new Vector2(startpos.x-1, startpos.y+3),
+
+                new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x-2, startpos.y+3),
+
+                new Vector2(startpos.x, startpos.y+4),
+            };
+
+            Vector2[] chests =
+            {
+                new Vector2(startpos.x, startpos.y+1),
+            };
+
+            Vector2[] gold =
+            {
+                new Vector2(startpos.x+1, startpos.y+4),
+                new Vector2(startpos.x-1, startpos.y+4),
+
+                new Vector2(startpos.x, startpos.y+5),
+            };
+
+
+            List<Vector2[]> slots = new List<Vector2[]>() { baseblk, chests, gold };
+
+            Structure tree = new Structure(check.ToArray(), itemids, slots, true);
+
+            tree.groundspots = new Vector2[]
+            {
+                new Vector2(startpos.x  , startpos.y),
+                new Vector2(startpos.x+1, startpos.y),
+                new Vector2(startpos.x+2, startpos.y),
+                new Vector2(startpos.x+3, startpos.y),
+                new Vector2(startpos.x+4, startpos.y),
+                new Vector2(startpos.x-1, startpos.y),
+                new Vector2(startpos.x-2, startpos.y),
+                new Vector2(startpos.x-3, startpos.y),
+                new Vector2(startpos.x-4, startpos.y),
+            };
+
+            tree.biome_id = 3;
+
+            return tree;
+        }
+
         public StructureLoader()
         {
         }

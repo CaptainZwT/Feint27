@@ -7,7 +7,7 @@
 			"standard_foilage_id" : "14",
 			"standard_liquid_id" : "0",
 			"region_class_id" : "3",
-			"top_occurance" : "15",
+			"top_occurance" : "10",
 			"bottom_occurance" : "0"
 		},
 		{
@@ -37,7 +37,7 @@
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
 			"region_class_id" : "7",
-			"top_occurance" : "20",
+			"top_occurance" : "30",
 			"bottom_occurance" : "0"
 		},
 		{

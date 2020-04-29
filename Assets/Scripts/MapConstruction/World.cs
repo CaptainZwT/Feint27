@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Information.Map;
+﻿using Assets.Scripts.Information.Items;
+using Assets.Scripts.Information.Map;
 using Assets.Scripts.Knowledge_Base;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Assets.Scripts.MapConstruction
         private Dictionary<Vector2, float> MapGraph;
         private Dictionary<Vector2, Tile> MapTiles;
         private Dictionary<Vector2, Tile> StructureTiles;
+        private List<int> features;
 
         // region height paramaters
         private float skyheight = 0.95f;
@@ -27,7 +29,7 @@ namespace Assets.Scripts.MapConstruction
         private float coreheight = 0.02f;
 
         // normal debugging
-        private bool debugging =  true;
+        private bool debugging = false;
 
         // Public functions
         public World(int _width, int _height, KnowledgeBase _kb, GameObject _obj)
@@ -41,6 +43,7 @@ namespace Assets.Scripts.MapConstruction
             amplitude = 14f;
             caving = 0.5f;
             offset = Random.Range(5, 50);
+            features = new List<int>();
 
             // initializing variables
             MapGraph = new Dictionary<Vector2, float>();
@@ -302,8 +305,22 @@ namespace Assets.Scripts.MapConstruction
         {
             foreach (Tile tile in MapTiles.Values)
             {
-                // Check for Grass
-                CheckGrass(tile);
+                // Check for Large Structures I.E. Pyramids
+                Check_LargeStructures(tile);
+            }
+
+            foreach (Tile tile in MapTiles.Values)
+            {
+                // Check for Turf I.E. Grass, Moss, Ash
+                CheckTurf(tile);
+
+                // Check for Small Structures I.E. Trees, Cactus
+                Check_SmallStructures(tile);
+            }
+
+            if (debugging)
+            {
+                Debug.Log(features.Count + " features created.");
             }
         }
 
@@ -323,29 +340,63 @@ namespace Assets.Scripts.MapConstruction
         /* helper functions */
 
 
-        private void CheckGrass(Tile tile)
+        private void CheckTurf(Tile tile)
         {
             Vector2 poscheck = new Vector2(tile.position.x, tile.position.y + 1);
 
             if (!MapTiles.ContainsKey(poscheck))
             {
-                GrowGrass(tile);
-                if (tile.home_biome.standard_foilage_id == 3)
+                GrowTurf(tile);
+            }
+        }
+
+        private void Check_LargeStructures(Tile tile)
+        {
+            Vector2 poscheck = new Vector2(tile.position.x, tile.position.y + 1);
+
+            float dice_roll = Random.Range(1, 100);
+
+            if (!MapTiles.ContainsKey(poscheck))
+            {
+                if (tile.home_biome.standard_foilage_id == 3) // Biome that has Grass
                 {
-                    CheckStructure(0, tile.position);
+
                 }
-                else if (tile.home_biome.standard_foilage_id == 5)
+                else if (tile.home_biome.standard_foilage_id == 5) // Biome that has Sand
                 {
-                    CheckStructure(1, tile.position);
-                }
-                else if (tile.home_biome.standard_foilage_id == 7)
-                {
-                    CheckStructure(2, tile.position);
+                    if ( ( (!features.Contains(2) && dice_roll < 30) || (features.Contains(2) && dice_roll < 5) && 
+                        CheckStructure(2, tile.position) ) )
+                    {
+                        features.Add(2);
+                    }
                 }
             }
         }
 
-        private void CheckStructure(int strucid, Vector2 startpos)
+        private void Check_SmallStructures(Tile tile)
+        {
+            Vector2 poscheck = new Vector2(tile.position.x, tile.position.y + 1);
+
+            if (!MapTiles.ContainsKey(poscheck))
+            {
+                if (tile.home_biome.standard_foilage_id == 3)
+                {
+                    if (CheckStructure(0, tile.position))
+                    {
+                        features.Add(0);
+                    }
+                }
+                else if (tile.home_biome.standard_foilage_id == 5)
+                {
+                    if (CheckStructure(1, tile.position))
+                    {
+                        features.Add(1);
+                    }
+                }
+            }
+        }
+
+        private bool CheckStructure(int strucid, Vector2 startpos)
         {
             Structure struc = translateStruc(strucid, startpos);
 
@@ -369,6 +420,12 @@ namespace Assets.Scripts.MapConstruction
                 }
             }
 
+            if (struc.ground_check && !grounding_structure(struc.groundspots, struc.biome_id))
+            {
+                canbuild = false;
+            }
+
+
             if (canbuild)
             {
                 for (int i = 0; i < struc.Itemids.Length; i++)
@@ -383,11 +440,13 @@ namespace Assets.Scripts.MapConstruction
                     }
                 }
             }
+
+            return canbuild;
         }
 
         /* tier 2 helper functions */
 
-        private void GrowGrass(Tile tile, int odds = 100)
+        private void GrowTurf(Tile tile, int odds = 100)
         {
 
             // Grow Grass
@@ -408,7 +467,7 @@ namespace Assets.Scripts.MapConstruction
 
                 if (MapTiles.ContainsKey(spreadCheck) && tile.home_biome == MapTiles[spreadCheck].home_biome)
                 {
-                    GrowGrass(MapTiles[spreadCheck], odds - Random.Range(10, 40));
+                    GrowTurf(MapTiles[spreadCheck], odds - Random.Range(10, 40));
                 }
             }
         }
@@ -421,9 +480,27 @@ namespace Assets.Scripts.MapConstruction
                     return knowledgebase.strucLoader.getTree(startpos);
                 case 1: // cactus
                     return knowledgebase.strucLoader.getCactus(startpos);
+                case 2: // pyramid
+                    return knowledgebase.strucLoader.getPyramid(startpos);
                 default: // no structure found
                     return null;
             }
+        }
+
+        private bool grounding_structure(Vector2[] locs, int biome_id)
+        {
+
+            foreach (Vector2 pos in locs)
+            {
+                if (!MapTiles.Keys.Contains(pos) ||
+                   (MapTiles.Keys.Contains(pos) && MapTiles[pos].home_biome == null) ||
+                   (MapTiles.Keys.Contains(pos) && MapTiles[pos].home_biome != null && MapTiles[pos].home_biome.id != biome_id))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         
