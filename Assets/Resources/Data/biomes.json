@@ -38,7 +38,7 @@
 			"standard_liquid_id" : "1",
 			"region_class_id" : "5",
 			"top_occurance" : "0",
-			"bottom_occurance" : "0"
+			"bottom_occurance" : "20"
 		},
 		{
 			"id" : "4",
@@ -68,7 +68,7 @@
 			"standard_liquid_id" : "1",
 			"region_class_id" : "5",
 			"top_occurance" : "0",
-			"bottom_occurance" : "35"
+			"bottom_occurance" : "20"
 		}
 	]
 }

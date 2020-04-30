@@ -464,18 +464,24 @@ namespace Assets.Scripts.Information.Map
 
             Vector2[] check =
             {
+                new Vector2(startpos.x+4, startpos.y+1),
+                new Vector2(startpos.x-4, startpos.y+1),
+
+                new Vector2(startpos.x+2, startpos.y+10),
+                new Vector2(startpos.x-2, startpos.y+10),
+                new Vector2(startpos.x, startpos.y+12),
             };
 
             Vector2[] stonedec =
             {
                 // cross
-                new Vector2(startpos.x, startpos.y+5),
-                new Vector2(startpos.x, startpos.y+6),
                 new Vector2(startpos.x, startpos.y+7),
                 new Vector2(startpos.x, startpos.y+8),
-                new Vector2(startpos.x+1, startpos.y+8),
-                new Vector2(startpos.x-1, startpos.y+8),
                 new Vector2(startpos.x, startpos.y+9),
+                new Vector2(startpos.x, startpos.y+10),
+                new Vector2(startpos.x+1, startpos.y+10),
+                new Vector2(startpos.x-1, startpos.y+10),
+                new Vector2(startpos.x, startpos.y+11),
             };
 
             Vector2[] dioritebase =
@@ -483,19 +489,25 @@ namespace Assets.Scripts.Information.Map
                 // base floor
                 new Vector2(startpos.x+1, startpos.y+1),
                 new Vector2(startpos.x+2, startpos.y+1),
+                new Vector2(startpos.x+3, startpos.y+1),
                 new Vector2(startpos.x-1, startpos.y+1),
                 new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
 
                 new Vector2(startpos.x+1, startpos.y+2),
                 new Vector2(startpos.x+2, startpos.y+2),
+                new Vector2(startpos.x+3, startpos.y+2),
                 new Vector2(startpos.x-1, startpos.y+2),
                 new Vector2(startpos.x-2, startpos.y+2),
+                new Vector2(startpos.x-3, startpos.y+2),
 
                 new Vector3(startpos.x,   startpos.y+3),
                 new Vector2(startpos.x+1, startpos.y+3),
                 new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x+3, startpos.y+3),
                 new Vector2(startpos.x-1, startpos.y+3),
                 new Vector2(startpos.x-2, startpos.y+3),
+                new Vector2(startpos.x-3, startpos.y+3),
 
                 new Vector3(startpos.x,   startpos.y+4),
                 new Vector2(startpos.x+1, startpos.y+4),
@@ -503,6 +515,7 @@ namespace Assets.Scripts.Information.Map
                 new Vector2(startpos.x-1, startpos.y+4),
                 new Vector2(startpos.x-2, startpos.y+4),
 
+                new Vector2(startpos.x, startpos.y+5),
                 new Vector2(startpos.x+1, startpos.y+5),
                 new Vector2(startpos.x-1, startpos.y+5),
             };
@@ -510,9 +523,13 @@ namespace Assets.Scripts.Information.Map
             Vector2[] basaltdec =
             {
                 // stone base deco
+                new Vector2(startpos.x+3, startpos.y+4),
+                new Vector2(startpos.x-3, startpos.y+4),
+
                 new Vector2(startpos.x+2, startpos.y+5),
                 new Vector2(startpos.x-2, startpos.y+5),
 
+                new Vector2(startpos.x, startpos.y+6),
                 new Vector2(startpos.x+1, startpos.y+6),
                 new Vector2(startpos.x-1, startpos.y+6),
             };
@@ -535,11 +552,345 @@ namespace Assets.Scripts.Information.Map
                 new Vector2(startpos.x  , startpos.y),
                 new Vector2(startpos.x+1, startpos.y),
                 new Vector2(startpos.x+2, startpos.y),
+                new Vector2(startpos.x+3, startpos.y),
                 new Vector2(startpos.x-1, startpos.y),
                 new Vector2(startpos.x-2, startpos.y),
+                new Vector2(startpos.x-3, startpos.y),
             };
 
             tree.biome_id = 6;
+
+            return tree;
+        }
+
+        public Structure getWoodWindmill(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                22, 15, 28, 6, 29, 30
+            };
+
+            Vector2[] check =
+            {
+                new Vector2(startpos.x, startpos.y+15),
+                new Vector2(startpos.x+4, startpos.y+1),
+                new Vector2(startpos.x+5, startpos.y+1),
+                new Vector2(startpos.x-4, startpos.y+1),
+                new Vector2(startpos.x-5, startpos.y+1),
+
+                new Vector2(startpos.x+4, startpos.y+3),
+                new Vector2(startpos.x+5, startpos.y+3),
+                new Vector2(startpos.x-4, startpos.y+3),
+                new Vector2(startpos.x-5, startpos.y+3),
+
+                new Vector2(startpos.x+7, startpos.y+9),
+                new Vector2(startpos.x-7, startpos.y+9),
+                new Vector2(startpos.x+8, startpos.y+9),
+                new Vector2(startpos.x-8, startpos.y+9),
+                new Vector2(startpos.x+9, startpos.y+9),
+                new Vector2(startpos.x-9, startpos.y+9),
+            };
+
+            Vector2[] dioritebase =
+            {
+                // floor
+                new Vector2(startpos.x+1, startpos.y+1),
+                new Vector2(startpos.x+2, startpos.y+1),
+                new Vector2(startpos.x+3, startpos.y+1),
+                new Vector2(startpos.x-1, startpos.y+1),
+                new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
+
+                // base
+                new Vector2(startpos.x+1, startpos.y+2),
+                new Vector2(startpos.x+2, startpos.y+2),
+                new Vector2(startpos.x-1, startpos.y+2),
+                new Vector2(startpos.x-2, startpos.y+2),
+
+                new Vector2(startpos.x, startpos.y+3),
+                new Vector2(startpos.x+1, startpos.y+3),
+                new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x-1, startpos.y+3),
+                new Vector2(startpos.x-2, startpos.y+3),
+
+                new Vector2(startpos.x, startpos.y+4),
+                new Vector2(startpos.x+1, startpos.y+4),
+                new Vector2(startpos.x-1, startpos.y+4),
+                new Vector2(startpos.x-2, startpos.y+4),
+
+                new Vector2(startpos.x, startpos.y+5),
+                new Vector2(startpos.x-1, startpos.y+5),
+
+                new Vector2(startpos.x, startpos.y+6),
+                new Vector2(startpos.x-1, startpos.y+6),
+
+                new Vector2(startpos.x-1, startpos.y+7),
+
+                new Vector2(startpos.x+1, startpos.y+8),
+                new Vector2(startpos.x-1, startpos.y+8),
+
+                new Vector2(startpos.x+1, startpos.y+10),
+                new Vector2(startpos.x-1, startpos.y+10),
+
+            };
+
+            Vector2[] darkwood_fan =
+            {
+                // base details
+                new Vector2(startpos.x+3, startpos.y+2),
+
+                new Vector2(startpos.x-3, startpos.y+2),
+                new Vector2(startpos.x-3, startpos.y+3),
+                new Vector2(startpos.x-3, startpos.y+4),
+
+                new Vector2(startpos.x-2, startpos.y+5),
+                new Vector2(startpos.x-3, startpos.y+5),
+
+                new Vector2(startpos.x-2, startpos.y+6),
+            };
+
+            Vector2[] granite =
+            {
+                new Vector2(startpos.x  , startpos.y+1),
+                new Vector2(startpos.x  , startpos.y+2),
+            };
+
+            Vector2[] oakwood_fan =
+            {
+                // fan
+                new Vector2(startpos.x+2, startpos.y+4),
+                new Vector2(startpos.x+1, startpos.y+5),
+                new Vector2(startpos.x+1, startpos.y+6),
+
+                new Vector2(startpos.x, startpos.y+7),
+                new Vector2(startpos.x-5, startpos.y+7),
+
+                new Vector2(startpos.x, startpos.y+8),
+                new Vector2(startpos.x-3, startpos.y+8),
+                new Vector2(startpos.x-4, startpos.y+8),
+
+                new Vector2(startpos.x+1, startpos.y+9),
+                new Vector2(startpos.x+2, startpos.y+9),
+                new Vector2(startpos.x-1, startpos.y+9),
+                new Vector2(startpos.x-2, startpos.y+9),
+
+                new Vector2(startpos.x, startpos.y+10),
+                new Vector2(startpos.x+3, startpos.y+10),
+                new Vector2(startpos.x+4, startpos.y+10),
+
+                new Vector2(startpos.x, startpos.y+11),
+                new Vector2(startpos.x+5, startpos.y+11),
+
+                new Vector2(startpos.x-1, startpos.y+12),
+                new Vector2(startpos.x-1, startpos.y+13),
+                new Vector2(startpos.x-2, startpos.y+14),
+
+                new Vector2(startpos.x-3, startpos.y+15),
+            };
+
+            Vector2[] darkRedWool =
+            {
+                new Vector2(startpos.x, startpos.y+9),
+            };
+
+            Vector2[] whiteWool =
+            {
+                // mill sail
+                new Vector2(startpos.x+3, startpos.y+3),
+                new Vector2(startpos.x+3, startpos.y+4),
+                new Vector2(startpos.x+3, startpos.y+5),
+
+                new Vector2(startpos.x+2, startpos.y+5),
+
+                new Vector2(startpos.x+2, startpos.y+6),
+                new Vector2(startpos.x-4, startpos.y+6),
+                new Vector2(startpos.x-5, startpos.y+6),
+                new Vector2(startpos.x-6, startpos.y+6),
+
+                new Vector2(startpos.x+2, startpos.y+7),
+                new Vector2(startpos.x+1, startpos.y+7),
+                new Vector2(startpos.x-2, startpos.y+7),
+                new Vector2(startpos.x-3, startpos.y+7),
+                new Vector2(startpos.x-4, startpos.y+7),
+
+                new Vector2(startpos.x-2, startpos.y+8),
+
+                new Vector2(startpos.x+2, startpos.y+10),
+
+                new Vector2(startpos.x+2, startpos.y+11),
+                new Vector2(startpos.x+3, startpos.y+11),
+                new Vector2(startpos.x+4, startpos.y+11),
+                new Vector2(startpos.x-1, startpos.y+11),
+                new Vector2(startpos.x-2, startpos.y+11),
+
+                new Vector2(startpos.x-2, startpos.y+12),
+                new Vector2(startpos.x-2, startpos.y+13),
+                new Vector2(startpos.x-3, startpos.y+13),
+
+                new Vector2(startpos.x-3, startpos.y+14),
+
+            };
+
+            // diorite
+            // dark wood
+            // granite
+            // oak wood
+            // dark red wool
+            // white wool
+
+            List<Vector2[]> slots = new List<Vector2[]>() { dioritebase, darkwood_fan, granite, oakwood_fan, darkRedWool, whiteWool };
+
+            Structure tree = new Structure(check.ToArray(), itemids, slots, true);
+
+            tree.groundspots = new Vector2[]
+            {
+                new Vector2(startpos.x  , startpos.y),
+                new Vector2(startpos.x+1, startpos.y),
+                new Vector2(startpos.x+2, startpos.y),
+                new Vector2(startpos.x+3, startpos.y),
+                new Vector2(startpos.x-1, startpos.y),
+                new Vector2(startpos.x-2, startpos.y),
+                new Vector2(startpos.x-3, startpos.y),
+            };
+
+            tree.biome_id = 1;
+
+            return tree;
+        }
+
+        public Structure getPantheon(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                22, 0
+            };
+
+            Vector2[] check =
+            {
+                new Vector2(startpos.x+10, startpos.y+1),
+                new Vector2(startpos.x-10, startpos.y+1),
+
+                new Vector2(startpos.x+9, startpos.y+6),
+                new Vector2(startpos.x-9, startpos.y+6),
+
+                new Vector2(startpos.x, startpos.y+7),
+            };
+
+            Vector2[] dioritebase =
+            {
+                // base
+                new Vector2(startpos.x, startpos.y+1),
+                new Vector2(startpos.x+1, startpos.y+1),
+                new Vector2(startpos.x+2, startpos.y+1),
+                new Vector2(startpos.x+3, startpos.y+1),
+                new Vector2(startpos.x+4, startpos.y+1),
+                new Vector2(startpos.x+5, startpos.y+1),
+                new Vector2(startpos.x+6, startpos.y+1),
+                new Vector2(startpos.x+7, startpos.y+1),
+                new Vector2(startpos.x+8, startpos.y+1),
+                new Vector2(startpos.x+9, startpos.y+1),
+                new Vector2(startpos.x-1, startpos.y+1),
+                new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
+                new Vector2(startpos.x-4, startpos.y+1),
+                new Vector2(startpos.x-5, startpos.y+1),
+                new Vector2(startpos.x-6, startpos.y+1),
+                new Vector2(startpos.x-7, startpos.y+1),
+                new Vector2(startpos.x-8, startpos.y+1),
+                new Vector2(startpos.x-9, startpos.y+1),
+
+                new Vector2(startpos.x, startpos.y+2),
+                new Vector2(startpos.x+1, startpos.y+2),
+                new Vector2(startpos.x+2, startpos.y+2),
+                new Vector2(startpos.x+3, startpos.y+2),
+                new Vector2(startpos.x+4, startpos.y+2),
+                new Vector2(startpos.x+5, startpos.y+2),
+                new Vector2(startpos.x+6, startpos.y+2),
+                new Vector2(startpos.x+7, startpos.y+2),
+                new Vector2(startpos.x+8, startpos.y+2),
+                new Vector2(startpos.x-1, startpos.y+2),
+                new Vector2(startpos.x-2, startpos.y+2),
+                new Vector2(startpos.x-3, startpos.y+2),
+                new Vector2(startpos.x-4, startpos.y+2),
+                new Vector2(startpos.x-5, startpos.y+2),
+                new Vector2(startpos.x-6, startpos.y+2),
+                new Vector2(startpos.x-7, startpos.y+2),
+                new Vector2(startpos.x-8, startpos.y+2),
+
+                // roof
+                new Vector2(startpos.x, startpos.y+5),
+                new Vector2(startpos.x+1, startpos.y+5),
+                new Vector2(startpos.x+2, startpos.y+5),
+                new Vector2(startpos.x+3, startpos.y+5),
+                new Vector2(startpos.x+4, startpos.y+5),
+                new Vector2(startpos.x+5, startpos.y+5),
+                new Vector2(startpos.x+6, startpos.y+5),
+                new Vector2(startpos.x+7, startpos.y+5),
+                new Vector2(startpos.x-1, startpos.y+5),
+                new Vector2(startpos.x-2, startpos.y+5),
+                new Vector2(startpos.x-3, startpos.y+5),
+                new Vector2(startpos.x-4, startpos.y+5),
+                new Vector2(startpos.x-5, startpos.y+5),
+                new Vector2(startpos.x-6, startpos.y+5),
+                new Vector2(startpos.x-7, startpos.y+5),
+            };
+
+            Vector2[] stone =
+            {
+                // pillars
+                new Vector2(startpos.x-6, startpos.y+3),
+                new Vector2(startpos.x-6, startpos.y+4),
+
+                new Vector2(startpos.x-3, startpos.y+3),
+                new Vector2(startpos.x-3, startpos.y+4),
+
+                new Vector2(startpos.x, startpos.y+3),
+                new Vector2(startpos.x, startpos.y+4),
+
+                new Vector2(startpos.x+3, startpos.y+3),
+                new Vector2(startpos.x+3, startpos.y+4),
+
+                new Vector2(startpos.x+6, startpos.y+3),
+                new Vector2(startpos.x+6, startpos.y+4),
+
+                // roof details
+                new Vector2(startpos.x-1, startpos.y+6),
+                new Vector2(startpos.x-2, startpos.y+6),
+                new Vector2(startpos.x-4, startpos.y+6),
+                new Vector2(startpos.x-5, startpos.y+6),
+
+                new Vector2(startpos.x+1, startpos.y+6),
+                new Vector2(startpos.x+2, startpos.y+6),
+                new Vector2(startpos.x+4, startpos.y+6),
+                new Vector2(startpos.x+5, startpos.y+6),
+            };
+
+            List<Vector2[]> slots = new List<Vector2[]>() { dioritebase, stone };
+
+            Structure tree = new Structure(check.ToArray(), itemids, slots, true);
+
+            tree.groundspots = new Vector2[]
+            {
+                new Vector2(startpos.x-1, startpos.y),
+                new Vector2(startpos.x-2, startpos.y),
+                new Vector2(startpos.x-3, startpos.y),
+                new Vector2(startpos.x-4, startpos.y),
+                new Vector2(startpos.x-5, startpos.y),
+                new Vector2(startpos.x-6, startpos.y),
+                new Vector2(startpos.x-7, startpos.y),
+                new Vector2(startpos.x-8, startpos.y),
+                new Vector2(startpos.x  , startpos.y),
+                new Vector2(startpos.x+1, startpos.y),
+                new Vector2(startpos.x+2, startpos.y),
+                new Vector2(startpos.x+3, startpos.y),
+                new Vector2(startpos.x+4, startpos.y),
+                new Vector2(startpos.x+5, startpos.y),
+                new Vector2(startpos.x+6, startpos.y),
+                new Vector2(startpos.x+7, startpos.y),
+                new Vector2(startpos.x+8, startpos.y),
+            };
+
+            tree.biome_id = 3;
 
             return tree;
         }

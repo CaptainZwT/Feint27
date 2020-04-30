@@ -27,6 +27,7 @@ namespace Assets.Scripts.MapConstruction
         private float skyheight = 0.95f;
         private float surfaceheight = 0.7f;
         private float coreheight = 0.1f;
+        private float displacement = 2;
 
         // normal debugging
         private bool debugging = false;
@@ -116,17 +117,17 @@ namespace Assets.Scripts.MapConstruction
                 Tile tile = new Tile(pos, this);
 
                 // Setting up region of the Tile
-                if (pos.y > height * surfaceheight)
+                if (pos.y > (height * surfaceheight) + Random.Range(-displacement, displacement))
                 {
-                    tile.home_region = knowledgebase.regions.Single(item => item.id == 1);
+                    tile.home_region = knowledgebase.regions.Single(item => item.id == 0); // surface
                 }
-                else if (pos.y < height * coreheight)
+                else if (pos.y < (height * coreheight) + Random.Range(-displacement, displacement))
                 {
-                    tile.home_region = knowledgebase.regions.Single(item => item.id == 2);
+                    tile.home_region = knowledgebase.regions.Single(item => item.id == 2); // core
                 }
                 else
                 {
-                    tile.home_region = knowledgebase.regions.Single(item => item.id == 1);
+                    tile.home_region = knowledgebase.regions.Single(item => item.id == 1); // underground
                 }
 
                 // Add tile to List
@@ -140,7 +141,7 @@ namespace Assets.Scripts.MapConstruction
 
             foreach (Tile tile in MapTiles.Values)
             {
-                if ( (tile.home_biome == null) && (tile.position.y <= (height * coreheight)) )
+                if (tile.home_region.id == 2)
                 { 
                     tile.home_biome = knowledgebase.biomes.Single(item => item.id == 5);
                     basetiles++;
@@ -160,7 +161,7 @@ namespace Assets.Scripts.MapConstruction
             {
                 if (tile.home_biome == null)
                 {
-                    if ( tile.position.y > (height * coreheight) && (tile.position.y >= ((height * surfaceheight))) )
+                    if (tile.home_region.id == 0)
                     {
                         tile.home_biome = knowledgebase.biomes.Single(item => item.id == 1);
                         basetiles++;
@@ -208,14 +209,14 @@ namespace Assets.Scripts.MapConstruction
 
                 if (tile.home_biome == null)
                 {
-                    if (tile.position.y >= ((height * surfaceheight)))
+                    if (tile.home_region.id == 0) // surface
                     {
                         if (Noise <= ( 0.6f + biome.top_occurance) && (biome.top_occurance>0))
                         {
                             tile.home_biome = biome;
                             tiles++;
                         }
-                    }
+                    } // underground
                     else if (Noise <= (0.6f + biome.bottom_occurance) && (biome.bottom_occurance > 0))
                     {
                         tile.home_biome = biome;
@@ -385,15 +386,28 @@ namespace Assets.Scripts.MapConstruction
             {
                 if (tile.home_biome.standard_foilage_id == 3) // Biome that has Grass
                 {
-                    if ( (dice_roll < 10) && // Cabin
+                    if ((dice_roll < 10) && // Wooden Windmill
+                        CheckStructure(8, tile.position))
+                    {
+                        features.Add(8);
+                    }
+                    else if ( (dice_roll < 20) && // Cabin
                         CheckStructure(3, tile.position) )
                     {
                         features.Add(3);
                     }
                 }
+                else if (tile.home_biome.standard_foilage_id == 8) // Biome that has Basalt
+                { 
+                    if ((true) && // Pantheon
+                        CheckStructure(9, tile.position))
+                    {
+                        features.Add(9);
+                    }
+                }
                 else if (tile.home_biome.standard_foilage_id == 23) // Graveyard Dirt
                 {
-                    if (!features.Contains(7) &&(CheckStructure(7, tile.position)) ) // Crypt
+                    if (dice_roll<25 &&(CheckStructure(7, tile.position)) ) // Crypt
                     {
                         features.Add(7);
                     }
@@ -587,6 +601,10 @@ namespace Assets.Scripts.MapConstruction
                     return knowledgebase.strucLoader.getFlower(startpos);
                 case 7: // crypt
                     return knowledgebase.strucLoader.getStoneCrypt(startpos);
+                case 8: // wooden windmill
+                    return knowledgebase.strucLoader.getWoodWindmill(startpos);
+                case 9: // pantheon
+                    return knowledgebase.strucLoader.getPantheon(startpos);
                 default: // no structure found
                     return null;
             }
