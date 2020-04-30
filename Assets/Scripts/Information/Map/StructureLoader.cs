@@ -374,6 +374,9 @@ namespace Assets.Scripts.Information.Map
 
             Vector2[] check =
             {
+               new Vector2(startpos.x + 1, startpos.y+1),
+               new Vector2(startpos.x - 1, startpos.y+1),
+
                new Vector2(startpos.x + 2, startpos.y+2),
                new Vector2(startpos.x - 2, startpos.y+2),
 
@@ -888,6 +891,221 @@ namespace Assets.Scripts.Information.Map
                 new Vector2(startpos.x+6, startpos.y),
                 new Vector2(startpos.x+7, startpos.y),
                 new Vector2(startpos.x+8, startpos.y),
+            };
+
+            tree.biome_id = 3;
+
+            return tree;
+        }
+
+        public Structure getSkyscraper(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                28, 0
+            };
+
+            Vector2[] check =
+            {
+                new Vector2(startpos.x+3, startpos.y+1),
+                new Vector2(startpos.x+4, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
+                new Vector2(startpos.x-4, startpos.y+1),
+
+                new Vector2(startpos.x+3, startpos.y+16),
+                new Vector2(startpos.x+4, startpos.y+16),
+                new Vector2(startpos.x-3, startpos.y+16),
+                new Vector2(startpos.x-4, startpos.y+16),
+
+                new Vector2(startpos.x, startpos.y+20),
+            };
+
+            Vector2[] granitebase =
+            {
+                // base
+                new Vector2(startpos.x, startpos.y+1),
+                new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x+1, startpos.y+1),
+                new Vector2(startpos.x+2, startpos.y+1),
+
+                new Vector2(startpos.x, startpos.y+2),
+                new Vector2(startpos.x-2, startpos.y+2),
+                new Vector2(startpos.x+1, startpos.y+2),
+                new Vector2(startpos.x+2, startpos.y+2),
+
+                new Vector2(startpos.x, startpos.y+3),
+                new Vector2(startpos.x-1, startpos.y+3),
+                new Vector2(startpos.x-2, startpos.y+3),
+                new Vector2(startpos.x+1, startpos.y+3),
+                new Vector2(startpos.x+2, startpos.y+3),
+
+                new Vector2(startpos.x, startpos.y+4),
+                new Vector2(startpos.x-1, startpos.y+4),
+                new Vector2(startpos.x-2, startpos.y+4),
+                new Vector2(startpos.x+1, startpos.y+4),
+                new Vector2(startpos.x+2, startpos.y+4),
+
+                new Vector2(startpos.x, startpos.y+5),
+                new Vector2(startpos.x-1, startpos.y+5),
+
+                new Vector2(startpos.x, startpos.y+6),
+                new Vector2(startpos.x-1, startpos.y+6),
+
+                new Vector2(startpos.x, startpos.y+7),
+                new Vector2(startpos.x-1, startpos.y+7),
+                new Vector2(startpos.x-2, startpos.y+7),
+                new Vector2(startpos.x+1, startpos.y+7),
+                new Vector2(startpos.x+2, startpos.y+7),
+
+                new Vector2(startpos.x, startpos.y+8),
+                new Vector2(startpos.x+1, startpos.y+8),
+
+                new Vector2(startpos.x, startpos.y+9),
+                new Vector2(startpos.x+1, startpos.y+9),
+
+                new Vector2(startpos.x, startpos.y+10),
+                new Vector2(startpos.x-1, startpos.y+10),
+                new Vector2(startpos.x-2, startpos.y+10),
+                new Vector2(startpos.x+1, startpos.y+10),
+                new Vector2(startpos.x+2, startpos.y+10),
+
+                new Vector2(startpos.x, startpos.y+11),
+                new Vector2(startpos.x-1, startpos.y+11),
+
+                new Vector2(startpos.x, startpos.y+12),
+                new Vector2(startpos.x-1, startpos.y+12),
+
+                new Vector2(startpos.x, startpos.y+13),
+                new Vector2(startpos.x-1, startpos.y+13),
+                new Vector2(startpos.x-2, startpos.y+13),
+                new Vector2(startpos.x+1, startpos.y+13),
+                new Vector2(startpos.x+2, startpos.y+13),
+
+                new Vector2(startpos.x, startpos.y+14),
+                new Vector2(startpos.x+1, startpos.y+14),
+
+                new Vector2(startpos.x, startpos.y+15),
+                new Vector2(startpos.x+1, startpos.y+15),
+
+                new Vector2(startpos.x, startpos.y+16),
+                new Vector2(startpos.x-1, startpos.y+16),
+                new Vector2(startpos.x-2, startpos.y+16),
+                new Vector2(startpos.x+1, startpos.y+16),
+                new Vector2(startpos.x+2, startpos.y+16),
+
+                new Vector2(startpos.x, startpos.y+17),
+                new Vector2(startpos.x-1, startpos.y+17),
+                new Vector2(startpos.x+1, startpos.y+17),
+
+                new Vector2(startpos.x, startpos.y+18),
+                new Vector2(startpos.x, startpos.y+19),
+            };
+
+            Vector2[] stone =
+            {
+                // door
+                new Vector2(startpos.x-1, startpos.y+1),
+                new Vector2(startpos.x-1, startpos.y+2),
+
+                // windows
+                // tier 1
+                new Vector2(startpos.x-2, startpos.y+5),
+                new Vector2(startpos.x+1, startpos.y+5),
+                new Vector2(startpos.x+2, startpos.y+5),
+
+                new Vector2(startpos.x-2, startpos.y+6),
+                new Vector2(startpos.x+1, startpos.y+6),
+                new Vector2(startpos.x+2, startpos.y+6),
+
+                // tier 2
+                new Vector2(startpos.x-2, startpos.y+8),
+                new Vector2(startpos.x-1, startpos.y+8),
+                new Vector2(startpos.x+2, startpos.y+8),
+
+                new Vector2(startpos.x-2, startpos.y+9),
+                new Vector2(startpos.x-1, startpos.y+9),
+                new Vector2(startpos.x+2, startpos.y+9),
+
+                // tier 1
+                new Vector2(startpos.x-2, startpos.y+11),
+                new Vector2(startpos.x+1, startpos.y+11),
+                new Vector2(startpos.x+2, startpos.y+11),
+
+                new Vector2(startpos.x-2, startpos.y+12),
+                new Vector2(startpos.x+1, startpos.y+12),
+                new Vector2(startpos.x+2, startpos.y+12),
+
+                // tier 2
+                new Vector2(startpos.x-2, startpos.y+14),
+                new Vector2(startpos.x-1, startpos.y+14),
+                new Vector2(startpos.x+2, startpos.y+14),
+
+                new Vector2(startpos.x-2, startpos.y+15),
+                new Vector2(startpos.x-1, startpos.y+15),
+                new Vector2(startpos.x+2, startpos.y+15),
+            };
+
+            List<Vector2[]> slots = new List<Vector2[]>() { granitebase, stone };
+
+            Structure tree = new Structure(check.ToArray(), itemids, slots, true);
+
+            tree.groundspots = new Vector2[]
+            {
+                new Vector2(startpos.x-1, startpos.y),
+                new Vector2(startpos.x-2, startpos.y),
+                new Vector2(startpos.x  , startpos.y),
+                new Vector2(startpos.x+1, startpos.y),
+                new Vector2(startpos.x+2, startpos.y),
+            };
+
+            tree.biome_id = 5;
+
+            return tree;
+        }
+
+        public Structure getDioriteColumn(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                22, 0
+            };
+
+            Vector2[] check =
+            {
+                new Vector2(startpos.x-4, startpos.y+1),
+                new Vector2(startpos.x+4, startpos.y+1),
+                new Vector2(startpos.x, startpos.y+5),
+            };
+
+            Vector2[] dioritedec =
+            {
+                // base
+                new Vector2(startpos.x-1, startpos.y+1),
+                new Vector2(startpos.x, startpos.y+1),
+                new Vector2(startpos.x+1, startpos.y+1),
+
+                new Vector2(startpos.x-1, startpos.y+4),
+                new Vector2(startpos.x, startpos.y+4),
+                new Vector2(startpos.x+1, startpos.y+4),
+            };
+
+            Vector2[] stonebase =
+            {
+                // stone base
+                new Vector2(startpos.x, startpos.y+2),
+                new Vector2(startpos.x, startpos.y+3),
+
+            };
+
+            List<Vector2[]> slots = new List<Vector2[]>() { dioritedec, stonebase };
+
+            Structure tree = new Structure(check.ToArray(), itemids, slots, true);
+
+            tree.groundspots = new Vector2[]
+            {
+                new Vector2(startpos.x-1, startpos.y),
+                new Vector2(startpos.x  , startpos.y),
+                new Vector2(startpos.x+1, startpos.y),
             };
 
             tree.biome_id = 3;

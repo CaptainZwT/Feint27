@@ -399,8 +399,7 @@ namespace Assets.Scripts.MapConstruction
                 }
                 else if (tile.home_biome.standard_foilage_id == 8) // Biome that has Basalt
                 { 
-                    if ((true) && // Pantheon
-                        CheckStructure(9, tile.position))
+                    if (CheckStructure(9, tile.position)) // Pantheon
                     {
                         features.Add(9);
                     }
@@ -420,6 +419,13 @@ namespace Assets.Scripts.MapConstruction
                         features.Add(2);
                     }
                 }
+                else if (tile.home_biome.standard_foilage_id == 4) // Ash
+                {
+                    if (CheckStructure(11, tile.position)) // Skyscraper
+                    {
+                        features.Add(11);
+                    }
+                }
             }
         }
 
@@ -431,14 +437,7 @@ namespace Assets.Scripts.MapConstruction
 
             if (!MapTiles.ContainsKey(poscheck))
             {
-                if (tile.home_biome.standard_foilage_id == 23) // Graveyard Dirt
-                {
-                    if ( (dice_roll <= 25) &&  CheckStructure(5, tile.position)) // Grave
-                    {
-                        features.Add(5);
-                    }
-                }
-                else if (tile.home_biome.standard_foilage_id == 3) // Grass
+               if (tile.home_biome.standard_foilage_id == 3) // Grass
                 {
                     if (CheckStructure(0, tile.position)) // Oak Tree
                     {
@@ -456,6 +455,13 @@ namespace Assets.Scripts.MapConstruction
                         features.Add(4);
                     }
                 }
+                else if (tile.home_biome.standard_foilage_id == 8) // Basalt
+                {
+                    if (CheckStructure(12, tile.position)) // Diorite Column
+                    {
+                        features.Add(12);
+                    }
+                }
             }
         }
 
@@ -463,9 +469,11 @@ namespace Assets.Scripts.MapConstruction
         {
             Vector2 poscheck = new Vector2(tile.position.x, tile.position.y + 1);
 
+            float dice_roll = Random.Range(1, 100);
+
             if (!MapTiles.ContainsKey(poscheck))
             {
-                if (tile.home_biome.standard_foilage_id == 1) // Dirt
+                if (tile.home_biome.standard_foilage_id == 3) // Grass
                 {
                     if (CheckStructure(6, tile.position)) // Flower
                     {
@@ -482,6 +490,13 @@ namespace Assets.Scripts.MapConstruction
                 else if (tile.home_biome.standard_foilage_id == 7) // Snow
                 {
 
+                }
+                else if (tile.home_biome.standard_foilage_id == 23) // Graveyard Dirt
+                {
+                    if ((dice_roll <= 50) && CheckStructure(5, tile.position)) // Grave
+                    {
+                        features.Add(5);
+                    }
                 }
             }
         }
@@ -605,6 +620,10 @@ namespace Assets.Scripts.MapConstruction
                     return knowledgebase.strucLoader.getWoodWindmill(startpos);
                 case 9: // pantheon
                     return knowledgebase.strucLoader.getPantheon(startpos);
+                case 11: // skyscraper
+                    return knowledgebase.strucLoader.getSkyscraper(startpos);
+                case 12: // diorite column
+                    return knowledgebase.strucLoader.getDioriteColumn(startpos);
                 default: // no structure found
                     return null;
             }
