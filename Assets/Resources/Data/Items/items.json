@@ -4,9 +4,9 @@
             "id" : "0",
             "name" : "Stone",
             "tilecolor" : {
-                "r" : "0.5",
-                "g" : "0.5",
-                "b" : "0.5",
+                "r" : "0.3",
+                "g" : "0.3",
+                "b" : "0.3",
                 "a" : "1"
             },
             "integrity" : "3.5"
@@ -15,8 +15,8 @@
             "id" : "1",
             "name" : "Dirt",
             "tilecolor" : {
-                "r" : "0.2",
-                "g" : "0.07",
+                "r" : "0.3",
+                "g" : "0.15",
                 "b" : "0",
                 "a" : "1"
             },
@@ -70,9 +70,9 @@
             "id" : "6",
             "name" : "Wood",
             "tilecolor" : {
-                "r" : "0.35",
-                "g" : "0.08",
-                "b" : "0.08",
+                "r" : "0.4",
+                "g" : "0.2",
+                "b" : "0.1",
                 "a" : "1"
             },
             "integrity" : "3"
@@ -125,9 +125,9 @@
             "id" : "11",
             "name" : "Ruby",
             "tilecolor" : {
-                "r" : "1",
-                "g" : "0",
-                "b" : "0",
+                "r" : "0.5",
+                "g" : "0.1",
+                "b" : "0.1",
                 "a" : "0.8"
             },
             "integrity" : "3"
@@ -169,7 +169,7 @@
             "id" : "15",
             "name" : "TaigaWood",
             "tilecolor" : {
-                "r" : "0.2",
+                "r" : "0.3",
                 "g" : "0.1",
                 "b" : "0.1",
                 "a" : "1"
@@ -219,6 +219,94 @@
                 "a" : "1"
             },
             "integrity" : "3"
+        },
+		{
+            "id" : "20",
+            "name" : "Leaves",
+            "tilecolor" : {
+                "r" : "0.1",
+                "g" : "0.4",
+                "b" : "0.1",
+                "a" : "1"
+            },
+            "integrity" : "2"
+        },
+        {
+            "id" : "21",
+            "name" : "Pine Leaves",
+            "tilecolor" : {
+                "r" : "0",
+                "g" : "0.2",
+                "b" : "0",
+                "a" : "1"
+            },
+            "integrity" : "2"
+        },
+        {
+            "id" : "22",
+            "name" : "Diorite",
+            "tilecolor" : {
+                "r" : "0.2",
+                "g" : "0.2",
+                "b" : "0.2",
+                "a" : "1"
+            },
+            "integrity" : "3.5"
+        },
+        {
+            "id" : "23",
+            "name" : "Graveyard Dirt",
+            "tilecolor" : {
+                "r" : "0.2",
+                "g" : "0.07",
+                "b" : "0",
+                "a" : "1"
+            },
+            "integrity" : "2"
+        },
+		{
+            "id" : "24",
+            "name" : "Poppy Flower",
+            "tilecolor" : {
+                "r" : "1",
+                "g" : "0",
+                "b" : "0",
+                "a" : "0.8"
+            },
+            "integrity" : "3"
+        },
+		{
+            "id" : "25",
+            "name" : "Iris Flower",
+            "tilecolor" : {
+                "r" : "0",
+                "g" : "0",
+                "b" : "0.7",
+                "a" : "0.8"
+            },
+            "integrity" : "3"
+        },
+		{
+            "id" : "26",
+            "name" : "Dandelion Flower",
+            "tilecolor" : {
+                "r" : "1",
+                "g" : "1",
+                "b" : "0.3",
+                "a" : "1"
+            },
+            "integrity" : "3"
+        },
+        {
+            "id" : "28",
+            "name" : "Granite",
+            "tilecolor" : {
+                "r" : "0",
+                "g" : "0",
+                "b" : "0",
+                "a" : "0.7"
+            },
+            "integrity" : "3.5"
         }
     ]
 }
