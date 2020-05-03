@@ -20,13 +20,25 @@ namespace Assets.Scripts.Information.Map
 
             Vector2[] check =
             {
-               new Vector2(startpos.x+4, startpos.y + 3),
-               new Vector2(startpos.x-4, startpos.y + 3),
+               new Vector2(startpos.x+3, startpos.y + 8),
+               new Vector2(startpos.x-3, startpos.y + 8),
 
-               new Vector2(startpos.x+4, startpos.y + 4),
-               new Vector2(startpos.x-4, startpos.y + 4),
+               new Vector2(startpos.x+3, startpos.y + 9),
+               new Vector2(startpos.x-3, startpos.y + 9),
 
-               new Vector2(startpos.x, startpos.y + 9),
+               new Vector2(startpos.x+2, startpos.y + 10),
+               new Vector2(startpos.x-2, startpos.y + 10),
+
+               new Vector2(startpos.x+2, startpos.y + 11),
+               new Vector2(startpos.x-2, startpos.y + 11),
+
+               new Vector2(startpos.x+1, startpos.y + 12),
+               new Vector2(startpos.x-1, startpos.y + 12),
+
+               new Vector2(startpos.x+1, startpos.y + 13),
+               new Vector2(startpos.x-1, startpos.y + 13),
+
+               new Vector2(startpos.x, startpos.y + 14),
             };
 
 
@@ -38,42 +50,108 @@ namespace Assets.Scripts.Information.Map
                 new Vector2(startpos.x, startpos.y + 4),
                 new Vector2(startpos.x, startpos.y + 5),
                 new Vector2(startpos.x, startpos.y + 6),
-                new Vector2(startpos.x, startpos.y + 7),
-                new Vector2(startpos.x, startpos.y + 8),
             };
 
             Vector2[] leaves =
             {
-                new Vector2(startpos.x+1, startpos.y + 4),
-                new Vector2(startpos.x+2, startpos.y + 4),
-                new Vector2(startpos.x+3, startpos.y + 4),
-                new Vector2(startpos.x-1, startpos.y + 4),
-                new Vector2(startpos.x-2, startpos.y + 4),
-                new Vector2(startpos.x-3, startpos.y + 4),
+                new Vector2(startpos.x-1, startpos.y+7),
+                new Vector2(startpos.x, startpos.y+7),
+                new Vector2(startpos.x+1, startpos.y+7),
 
+                new Vector2(startpos.x-2, startpos.y+8),
+                new Vector2(startpos.x-1, startpos.y+8),
+                new Vector2(startpos.x, startpos.y+8),
+                new Vector2(startpos.x+1, startpos.y+8),
+                new Vector2(startpos.x+2, startpos.y+8),
+
+
+                new Vector2(startpos.x-2, startpos.y+9),
+                new Vector2(startpos.x-1, startpos.y+9),
+                new Vector2(startpos.x, startpos.y+9),
+                new Vector2(startpos.x+1, startpos.y+9),
+                new Vector2(startpos.x+2, startpos.y+9),
+
+                new Vector2(startpos.x-1, startpos.y+10),
+                new Vector2(startpos.x, startpos.y+10),
+                new Vector2(startpos.x+1, startpos.y+10),
+
+                new Vector2(startpos.x-1, startpos.y+11),
+                new Vector2(startpos.x, startpos.y+11),
+                new Vector2(startpos.x+1, startpos.y+11),
+
+                new Vector2(startpos.x, startpos.y+12),
+                new Vector2(startpos.x, startpos.y+13),
+            };
+
+            List<Vector2[]> slots = new List<Vector2[]>() { root, leaves };
+
+            Structure tree = new Structure(check, itemids, slots);
+
+            return tree;
+        }
+
+        public Structure getTree2(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                6, 20
+            };
+
+            Vector2[] check =
+            {
+               new Vector2(startpos.x+3, startpos.y + 5),
+               new Vector2(startpos.x-3, startpos.y + 5),
+
+               new Vector2(startpos.x+3, startpos.y + 6),
+               new Vector2(startpos.x-3, startpos.y + 6),
+
+               new Vector2(startpos.x+3, startpos.y + 7),
+               new Vector2(startpos.x-3, startpos.y + 7),
+
+               new Vector2(startpos.x+3, startpos.y + 8),
+               new Vector2(startpos.x-3, startpos.y + 8),
+
+
+               new Vector2(startpos.x+2, startpos.y + 9),
+               new Vector2(startpos.x-2, startpos.y + 9),
+               new Vector2(startpos.x, startpos.y + 9),
+            };
+
+
+            Vector2[] root =
+            {
+                new Vector2(startpos.x, startpos.y + 1),
+                new Vector2(startpos.x, startpos.y + 2),
+                new Vector2(startpos.x, startpos.y + 3),
+            };
+
+            Vector2[] leaves =
+            {
+                new Vector2(startpos.x-1, startpos.y + 4),
+                new Vector2(startpos.x, startpos.y + 4),
+                new Vector2(startpos.x+1, startpos.y + 4),
+
+                new Vector2(startpos.x-2, startpos.y + 5),
+                new Vector2(startpos.x-1, startpos.y + 5),
+                new Vector2(startpos.x,   startpos.y + 5),
                 new Vector2(startpos.x+1, startpos.y + 5),
                 new Vector2(startpos.x+2, startpos.y + 5),
-                new Vector2(startpos.x+3, startpos.y + 5),
-                new Vector2(startpos.x-1, startpos.y + 5),
-                new Vector2(startpos.x-2, startpos.y + 5),
-                new Vector2(startpos.x-3, startpos.y + 5),
 
+                new Vector2(startpos.x-2, startpos.y + 6),
+                new Vector2(startpos.x-1, startpos.y + 6),
+                new Vector2(startpos.x,   startpos.y + 6),
                 new Vector2(startpos.x+1, startpos.y + 6),
                 new Vector2(startpos.x+2, startpos.y + 6),
-                new Vector2(startpos.x+3, startpos.y + 6),
-                new Vector2(startpos.x-1, startpos.y + 6),
-                new Vector2(startpos.x-2, startpos.y + 6),
-                new Vector2(startpos.x-3, startpos.y + 6),
 
+                new Vector2(startpos.x-2, startpos.y + 7),
+                new Vector2(startpos.x-1, startpos.y + 7),
+                new Vector2(startpos.x,   startpos.y + 7),
                 new Vector2(startpos.x+1, startpos.y + 7),
                 new Vector2(startpos.x+2, startpos.y + 7),
-                new Vector2(startpos.x-1, startpos.y + 7),
-                new Vector2(startpos.x-2, startpos.y + 7),
 
-                new Vector2(startpos.x+1, startpos.y + 8),
                 new Vector2(startpos.x-1, startpos.y + 8),
-
-                new Vector2(startpos.x,   startpos.y + 9),
+                new Vector2(startpos.x, startpos.y + 8),
+                new Vector2(startpos.x+1, startpos.y + 8),
             };
 
             List<Vector2[]> slots = new List<Vector2[]>() { root, leaves };
@@ -126,38 +204,49 @@ namespace Assets.Scripts.Information.Map
             Vector2[] check =
             {
 
-               new Vector2(startpos.x  , startpos.y+2),
-               new Vector2(startpos.x+1, startpos.y+2),
-               new Vector2(startpos.x-1, startpos.y+2),
+               new Vector2(startpos.x-6  , startpos.y+1),
+               new Vector2(startpos.x+6, startpos.y+1),
 
-               new Vector2(startpos.x, startpos.y+6),
+               new Vector2(startpos.x, startpos.y+7),
             };
 
             Vector2[] baseblk =
             {
+                // sandstone
+                new Vector2(startpos.x-5, startpos.y+1),
+                new Vector2(startpos.x-4, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
+                new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x-1, startpos.y+1),
                 new Vector2(startpos.x+1, startpos.y+1),
                 new Vector2(startpos.x+2, startpos.y+1),
                 new Vector2(startpos.x+3, startpos.y+1),
                 new Vector2(startpos.x+4, startpos.y+1),
-                new Vector2(startpos.x-1, startpos.y+1),
-                new Vector2(startpos.x-2, startpos.y+1),
-                new Vector2(startpos.x-3, startpos.y+1),
-                new Vector2(startpos.x-4, startpos.y+1),
+                new Vector2(startpos.x+5, startpos.y+1),
 
-                new Vector2(startpos.x+2, startpos.y+2),
-                new Vector2(startpos.x-2, startpos.y+2),
-                new Vector2(startpos.x+3, startpos.y+2),
+                new Vector2(startpos.x-4, startpos.y+2),
                 new Vector2(startpos.x-3, startpos.y+2),
+                new Vector2(startpos.x-2, startpos.y+2),
+                new Vector2(startpos.x-1, startpos.y+2),
+                new Vector2(startpos.x, startpos.y+2),
+                new Vector2(startpos.x+1, startpos.y+2),
+                new Vector2(startpos.x+2, startpos.y+2),
+                new Vector2(startpos.x+3, startpos.y+2),
+                new Vector2(startpos.x+4, startpos.y+2), 
 
-                new Vector2(startpos.x+1, startpos.y+3),
-                new Vector2(startpos.x-1, startpos.y+3),
-
-                new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x-3, startpos.y+3),
                 new Vector2(startpos.x-2, startpos.y+3),
+                new Vector2(startpos.x-1, startpos.y+3),
+                new Vector2(startpos.x, startpos.y+3),
+                new Vector2(startpos.x+1, startpos.y+3),
+                new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x+3, startpos.y+3),
 
+                new Vector2(startpos.x-2, startpos.y+4),
+                new Vector2(startpos.x-1, startpos.y+4),
                 new Vector2(startpos.x, startpos.y+4),
                 new Vector2(startpos.x+1, startpos.y+4),
-                new Vector2(startpos.x-1, startpos.y+4),
+                new Vector2(startpos.x+2, startpos.y+4),
             };
 
             Vector2[] chests =
@@ -167,7 +256,11 @@ namespace Assets.Scripts.Information.Map
 
             Vector2[] gold =
             {
+                new Vector2(startpos.x-1, startpos.y+5),
                 new Vector2(startpos.x, startpos.y+5),
+                new Vector2(startpos.x+1, startpos.y+5),
+
+                new Vector2(startpos.x, startpos.y+6),
             };
 
 
@@ -182,10 +275,12 @@ namespace Assets.Scripts.Information.Map
                 new Vector2(startpos.x+2, startpos.y),
                 new Vector2(startpos.x+3, startpos.y),
                 new Vector2(startpos.x+4, startpos.y),
+                new Vector2(startpos.x+5, startpos.y),
                 new Vector2(startpos.x-1, startpos.y),
                 new Vector2(startpos.x-2, startpos.y),
                 new Vector2(startpos.x-3, startpos.y),
                 new Vector2(startpos.x-4, startpos.y),
+                new Vector2(startpos.x-5, startpos.y),
             };
 
             tree.biome_id = 2;
@@ -202,79 +297,110 @@ namespace Assets.Scripts.Information.Map
 
             Vector2[] check =
             {
+                new Vector2(startpos.x-6, startpos.y+6),
+                new Vector2(startpos.x+6, startpos.y+6),
+
+                new Vector2(startpos.x, startpos.y+11),
             };
 
             Vector2[] stonebase =
             {
                 // base floor
-                new Vector2(startpos.x, startpos.y+1),
+                new Vector2(startpos.x-3, startpos.y+1),
+                new Vector2(startpos.x-2, startpos.y+1),
+                new Vector2(startpos.x-1, startpos.y+1),
                 new Vector2(startpos.x+1, startpos.y+1),
                 new Vector2(startpos.x+2, startpos.y+1),
                 new Vector2(startpos.x+3, startpos.y+1),
-                new Vector2(startpos.x-1, startpos.y+1),
-                new Vector2(startpos.x-2, startpos.y+1),
-                new Vector2(startpos.x-3, startpos.y+1),
 
-                // center pillar
-                new Vector2(startpos.x, startpos.y+2),
-                new Vector2(startpos.x, startpos.y+3),
-                new Vector2(startpos.x, startpos.y+4),
-                new Vector2(startpos.x, startpos.y+5),
-                new Vector2(startpos.x, startpos.y+6),
-
-                // left pillar
+                new Vector2(startpos.x-3, startpos.y+2),
+                new Vector2(startpos.x-2, startpos.y+2),
+                new Vector2(startpos.x-1, startpos.y+2),
+                new Vector2(startpos.x+1, startpos.y+2),
+                new Vector2(startpos.x+2, startpos.y+2),
                 new Vector2(startpos.x+3, startpos.y+2),
+
+                new Vector2(startpos.x-3, startpos.y+3),
+                new Vector2(startpos.x-1, startpos.y+3),
+                new Vector2(startpos.x,   startpos.y+3),
+                new Vector2(startpos.x+1, startpos.y+3),
                 new Vector2(startpos.x+3, startpos.y+3),
+
+                new Vector2(startpos.x-3, startpos.y+4),
+                new Vector2(startpos.x-1, startpos.y+4),
+                new Vector2(startpos.x,   startpos.y+4),
+                new Vector2(startpos.x+1, startpos.y+4),
                 new Vector2(startpos.x+3, startpos.y+4),
+
+                new Vector2(startpos.x-3, startpos.y+5),
+                new Vector2(startpos.x-2, startpos.y+5),
+                new Vector2(startpos.x-1, startpos.y+5),
+                new Vector2(startpos.x, startpos.y+5),
+                new Vector2(startpos.x+1, startpos.y+5),
+                new Vector2(startpos.x+2, startpos.y+5),
                 new Vector2(startpos.x+3, startpos.y+5),
 
-                // right pillar
-                new Vector2(startpos.x-3, startpos.y+2),
-                new Vector2(startpos.x-3, startpos.y+3),
-                new Vector2(startpos.x-3, startpos.y+4),
-                new Vector2(startpos.x-3, startpos.y+5),
-
-                // center 2nd story floor
-                new Vector2(startpos.x+1, startpos.y+4),
-                new Vector2(startpos.x+2, startpos.y+4),
-                new Vector2(startpos.x+4, startpos.y+4),
-                new Vector2(startpos.x-1, startpos.y+4),
-                new Vector2(startpos.x-2, startpos.y+4),
-                new Vector2(startpos.x-4, startpos.y+4),
-
-                new Vector2(startpos.x+1, startpos.y+5),
-                new Vector2(startpos.x-1, startpos.y+5),
+                new Vector2(startpos.x-2, startpos.y+6),
+                new Vector2(startpos.x-1, startpos.y+6),
+                new Vector2(startpos.x, startpos.y+6),
+                new Vector2(startpos.x+1, startpos.y+6),
+                new Vector2(startpos.x+2, startpos.y+6),
             };
 
             Vector2[] woodbase =
             {
-                // left arc
-                new Vector2(startpos.x+5, startpos.y+4),
-                new Vector2(startpos.x+4, startpos.y+5),
-                new Vector2(startpos.x+3, startpos.y+6),
-                new Vector2(startpos.x+2, startpos.y+5),
+                // door
+                new Vector2(startpos.x, startpos.y+1),
+                new Vector2(startpos.x, startpos.y+2),
 
-                // right arc
-                new Vector2(startpos.x-5, startpos.y+4),
-                new Vector2(startpos.x-4, startpos.y+5),
-                new Vector2(startpos.x-3, startpos.y+6),
-                new Vector2(startpos.x-2, startpos.y+5),
-
-                // center arc
-                new Vector2(startpos.x-1, startpos.y+6),
-                new Vector2(startpos.x+1, startpos.y+6),
-                new Vector2(startpos.x,   startpos.y+7),
-
-                // filling wood on left and right sides
-                new Vector2(startpos.x+1, startpos.y+2),
-                new Vector2(startpos.x+2, startpos.y+2),
-                new Vector2(startpos.x+1, startpos.y+3),
-                new Vector2(startpos.x+2, startpos.y+3),
-
-                new Vector2(startpos.x-1, startpos.y+2),
-                new Vector2(startpos.x-2, startpos.y+2),
-                new Vector2(startpos.x-1, startpos.y+3),
+                // left window
                 new Vector2(startpos.x-2, startpos.y+3),
+                new Vector2(startpos.x-2, startpos.y+4),
+
+                // right window
+                new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x+2, startpos.y+4),
+
+                // roof
+                new Vector2(startpos.x-4, startpos.y+5),
+                new Vector2(startpos.x+4, startpos.y+5),
+
+                new Vector2(startpos.x-5, startpos.y+6),
+                new Vector2(startpos.x-4, startpos.y+6),
+                new Vector2(startpos.x-3, startpos.y+6),
+                new Vector2(startpos.x+3, startpos.y+6),
+                new Vector2(startpos.x+4, startpos.y+6),
+                new Vector2(startpos.x+5, startpos.y+6),
+
+                new Vector2(startpos.x-4, startpos.y+7),
+                new Vector2(startpos.x-3, startpos.y+7),
+                new Vector2(startpos.x-2, startpos.y+7),
+                new Vector2(startpos.x-1, startpos.y+7),
+                new Vector2(startpos.x  , startpos.y+7),
+                new Vector2(startpos.x+1, startpos.y+7),
+                new Vector2(startpos.x+2, startpos.y+7),
+                new Vector2(startpos.x+3, startpos.y+7),
+                new Vector2(startpos.x+4, startpos.y+7),
+
+                new Vector2(startpos.x-3, startpos.y+8),
+                new Vector2(startpos.x-2, startpos.y+8),
+                new Vector2(startpos.x-1, startpos.y+8),
+                new Vector2(startpos.x  , startpos.y+8),
+                new Vector2(startpos.x+1, startpos.y+8),
+                new Vector2(startpos.x+2, startpos.y+8),
+                new Vector2(startpos.x+3, startpos.y+8),
+
+                new Vector2(startpos.x-2, startpos.y+9),
+                new Vector2(startpos.x-1, startpos.y+9),
+                new Vector2(startpos.x,   startpos.y+9),
+                new Vector2(startpos.x+1, startpos.y+9),
+                new Vector2(startpos.x+2, startpos.y+9),
+
+                new Vector2(startpos.x-1, startpos.y+10),
+                new Vector2(startpos.x,   startpos.y+10),
+                new Vector2(startpos.x+1, startpos.y+10),
+
+                new Vector2(startpos.x,   startpos.y+11),
             };
 
 
@@ -320,11 +446,6 @@ namespace Assets.Scripts.Information.Map
             {
                 new Vector2(startpos.x, startpos.y + 1),
                 new Vector2(startpos.x, startpos.y + 2),
-                new Vector2(startpos.x, startpos.y + 3),
-                new Vector2(startpos.x, startpos.y + 4),
-                new Vector2(startpos.x, startpos.y + 5),
-                new Vector2(startpos.x, startpos.y + 6),
-                new Vector2(startpos.x, startpos.y + 7),
             };
 
             Vector2[] leaves =
@@ -338,19 +459,25 @@ namespace Assets.Scripts.Information.Map
 
                 new Vector2(startpos.x+1, startpos.y+3),
                 new Vector2(startpos.x+2, startpos.y+3),
+                new Vector2(startpos.x, startpos.y + 3),
                 new Vector2(startpos.x-1, startpos.y+3),
                 new Vector2(startpos.x-2, startpos.y+3),
 
                 new Vector2(startpos.x+1, startpos.y+4),
                 new Vector2(startpos.x-1, startpos.y+4),
+                new Vector2(startpos.x, startpos.y+4),
                 new Vector2(startpos.x+2, startpos.y+4),
                 new Vector2(startpos.x-2, startpos.y+4),
 
                 new Vector2(startpos.x+1, startpos.y+5),
+                new Vector2(startpos.x, startpos.y+5),
                 new Vector2(startpos.x-1, startpos.y+5),
 
                 new Vector2(startpos.x+1, startpos.y+6),
+                new Vector2(startpos.x, startpos.y+6),
                 new Vector2(startpos.x-1, startpos.y+6),
+
+                new Vector2(startpos.x, startpos.y+7),
             };
 
             Vector2[] snow =
@@ -435,8 +562,10 @@ namespace Assets.Scripts.Information.Map
             {
                new Vector2(startpos.x + 1, startpos.y+1),
                new Vector2(startpos.x - 1, startpos.y+1),
-               new Vector2(startpos.x + 2, startpos.y+1),
-               new Vector2(startpos.x - 2, startpos.y+1),
+
+               new Vector2(startpos.x + 1, startpos.y+2),
+               new Vector2(startpos.x - 1, startpos.y+2),
+
                new Vector2(startpos.x, startpos.y + 3)
             };
 
@@ -1109,6 +1238,58 @@ namespace Assets.Scripts.Information.Map
             };
 
             tree.biome_id = 3;
+
+            return tree;
+        }
+
+        public Structure getStrawberryBush(Vector2 startpos)
+        {
+            int[] itemids =
+            {
+                6, 20, 33
+            };
+
+            Vector2[] check =
+            {
+               new Vector2(startpos.x+2, startpos.y + 4),
+               new Vector2(startpos.x-2, startpos.y + 4),
+               new Vector2(startpos.x+3, startpos.y + 4),
+               new Vector2(startpos.x-3, startpos.y + 4),
+
+               new Vector2(startpos.x, startpos.y + 6),
+            };
+
+
+            Vector2[] root =
+            {
+                new Vector2(startpos.x, startpos.y + 1),
+            };
+
+            Vector2[] leaves =
+            {
+                new Vector2(startpos.x-1, startpos.y+2),
+                new Vector2(startpos.x, startpos.y+2),
+                new Vector2(startpos.x+1, startpos.y+2),
+
+                new Vector2(startpos.x-1, startpos.y+3),
+                new Vector2(startpos.x, startpos.y+3),
+
+                new Vector2(startpos.x, startpos.y+4),
+                new Vector2(startpos.x+1, startpos.y+4),
+
+               new Vector2(startpos.x, startpos.y + 5),
+            };
+
+            Vector2[] berries =
+            {
+                new Vector2(startpos.x+1, startpos.y+3),
+
+                new Vector2(startpos.x-1, startpos.y+4),
+            };
+
+            List<Vector2[]> slots = new List<Vector2[]>() { root, leaves, berries };
+
+            Structure tree = new Structure(check, itemids, slots);
 
             return tree;
         }

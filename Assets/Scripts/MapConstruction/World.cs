@@ -30,7 +30,7 @@ namespace Assets.Scripts.MapConstruction
         private float displacement = 2;
 
         // normal debugging
-        private bool debugging = false;
+        private bool debugging = true;
 
         // Public functions
         public World(int _width, int _height, KnowledgeBase _kb, GameObject _obj)
@@ -60,7 +60,7 @@ namespace Assets.Scripts.MapConstruction
 
             GrowFoilage();
 
-            //BuildOres();
+            BuildOres();
 
             FillLiquids();
 
@@ -230,64 +230,110 @@ namespace Assets.Scripts.MapConstruction
 
         private void BuildOres()
         {
-            float b_amp = 10f, b_offset = Random.Range(0, 99999);
-            float b_freq = 5f;
+            // Need to be changed to follow the pattern of Biome
+            // Instead of generating a single noise map and generating all ores from it
+            // need a noise map per ore type
 
-            int ores_created = 0, wave;
+            // Noise map parameters
+            int ore_octaves = 4;
+            float[] ore_offsets = new float[ore_octaves];
 
-            // building biomes
+            for (int i = 0; i < (ore_octaves-1); i++)
+            {
+                ore_offsets[i] = Random.Range(0, 999999);
+            }
+
+            float b_freq = 20f;
+            float ore_rarity = 0.7f;
+
+            // Debugging variable
+            int ores_created = 0;
+
+            // generating noise map and assigning ores based on map
             foreach (Tile tile in MapTiles.Values)
             {
                 Vector2 pos = tile.position;
-                wave = 5;
 
                 // Setting the Coord using scale for our PerlinNoise
-                float xCoord = ((float)pos.x / (b_freq / wave)) * (b_amp * wave);
-                float yCoord = ((float)pos.y / (b_freq / wave)) * (b_amp * wave);
+                float xCoord = ((float)pos.x / (b_freq));
+                float yCoord = ((float)pos.y / (b_freq));
 
-                // Creating Noise based on the number of octaves
-                float Noise = Mathf.PerlinNoise(xCoord + b_offset, yCoord + b_offset);
+                //
+                bool canSpawn = true;
 
-                wave = 2;
-
-                xCoord = ((float)pos.x / (b_freq * wave)) * (b_amp / wave);
-                yCoord = ((float)pos.y / (b_freq * wave)) * (b_amp / wave);
-
-                // Creating Noise based on the number of octaves
-                Noise += Mathf.PerlinNoise(xCoord + b_offset, yCoord + b_offset);
-
-                //Debug.Log(Noise);
-
-                if (tile.position.y < ((height * skyheight)-10) )
+                for (int i = 1; i <= (displacement*3); i++)
                 {
-                    if (Noise > 1.2)
+                    Vector2 abovepos = new Vector2(pos.x, pos.y + i);
+
+                    // Ore can only spawn at least twice the displacement number of blocks below the surface
+                    if (canSpawn &&  (!MapTiles.Keys.Contains(abovepos)))
                     {
-                        float dice_roll = Random.Range(1f, 100f);
+                        canSpawn = false;
+                    }
+                }
 
-                        if (pos.y >= (height * surfaceheight) / 2)
-                        {
-                            if (dice_roll < 50)
-                            {
-                                tile.SetItem(knowledgebase.items.Single(item => item.id == 9)); // Iron
-                            }
-                            else
-                            {
-                                tile.SetItem(knowledgebase.items.Single(item => item.id == 10)); // Tin
-                            }
-                        }
-                        else
-                        {
-                            if (dice_roll < 40)
-                            {
-                                tile.SetItem(knowledgebase.items.Single(item => item.id == 9)); // Iron
-                            }
-                            else
-                            {
-                                tile.SetItem(knowledgebase.items.Single(item => item.id == 13)); // Emerald
-                            }
-                        }
+                float dice_roll = Random.Range(0, 100);
 
-                        ores_created++;
+                foreach (float offset in ore_offsets)
+                {
+                    float Noise = Mathf.PerlinNoise(xCoord + offset, yCoord + offset);
+
+                    if (canSpawn && tile.position.y < ((height * skyheight) - (displacement * 2)))
+                    {
+                        if (Noise > ore_rarity)
+                        {
+                            if (tile.home_region.id == 0) // surface
+                            {
+                                if (dice_roll <= 20)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 10)); // Tin
+                                }
+                                else
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 32)); // Copper
+                                }
+                            }
+                            else if (tile.home_region.id == 1) // underground
+                            {
+                                if (dice_roll <= 2)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 13)); // Emerald
+                                }
+                                else if (dice_roll <= 40)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 31)); // Coal
+                                }
+                                else
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 9)); // Iron
+                                }
+                            }
+                            else if (tile.home_region.id == 2) // the core
+                            {
+                                if (dice_roll <= 3)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 11)); // Ruby
+                                }
+                                else if (dice_roll <= 8)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 12)); // Silver
+                                }
+                                else if (dice_roll <= 30)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 19)); // Gold
+                                }
+                                else if (dice_roll <= 50)
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 27)); // Cobalt
+                                }
+                                else
+                                {
+                                    tile.SetItem(knowledgebase.items.Single(item => item.id == 9)); // Iron
+                                }
+                            }
+
+                            ores_created++;
+                        }
                     }
                 }
             }
@@ -302,7 +348,7 @@ namespace Assets.Scripts.MapConstruction
         {
             foreach (Vector2 pos in MapGraph.Keys)
             {
-                if ( (pos.y <= (height*coreheight)/2) && (!MapTiles.Keys.Contains(pos)) )
+                if ( (pos.y <= ((height*coreheight)/2) + Random.Range(-displacement, displacement) && (!MapTiles.Keys.Contains(pos)) ) )
                 {
                     Tile newtile = new Tile(pos, this);
 
@@ -386,12 +432,12 @@ namespace Assets.Scripts.MapConstruction
             {
                 if (tile.home_biome.standard_foilage_id == 3) // Biome that has Grass
                 {
-                    if ((dice_roll < 10) && // Wooden Windmill
+                    if ((dice_roll <= 10) && // Wooden Windmill
                         CheckStructure(8, tile.position))
                     {
                         features.Add(8);
                     }
-                    else if ( (dice_roll < 20) && // Cabin
+                    else if ( (dice_roll <= 20) && // Cabin
                         CheckStructure(3, tile.position) )
                     {
                         features.Add(3);
@@ -413,8 +459,7 @@ namespace Assets.Scripts.MapConstruction
                 }
                 else if (tile.home_biome.standard_foilage_id == 5) // Biome that has Sand
                 {
-                    if ( ( (!features.Contains(2) && dice_roll < 30) || (features.Contains(2) && dice_roll < 5) && 
-                        CheckStructure(2, tile.position) ) ) // Pyramid
+                    if (CheckStructure(2, tile.position))  // Pyramid
                     {
                         features.Add(2);
                     }
@@ -439,9 +484,13 @@ namespace Assets.Scripts.MapConstruction
             {
                if (tile.home_biome.standard_foilage_id == 3) // Grass
                 {
-                    if (CheckStructure(0, tile.position)) // Oak Tree
+                    if (CheckStructure(0, tile.position)) // Evergreen Tree Wide
                     {
                         features.Add(0);
+                    }
+                    else if (CheckStructure(14, tile.position)) // Evergreen Tree #2
+                    {
+                        features.Add(14);
                     }
                 }
                 else if (tile.home_biome.standard_foilage_id == 5) // Sand
@@ -480,6 +529,13 @@ namespace Assets.Scripts.MapConstruction
                         features.Add(6);
                     }
                 }
+                else if (tile.home_biome.standard_foilage_id == 1) // Dirt
+                {
+                    if (CheckStructure(13, tile.position)) // Strawberry Bush
+                    {
+                        features.Add(13);
+                    }
+                }
                 else if (tile.home_biome.standard_foilage_id == 5) // Sand
                 {
                     if (CheckStructure(1, tile.position)) // Cactus
@@ -503,6 +559,8 @@ namespace Assets.Scripts.MapConstruction
 
         private bool CheckStructure(int strucid, Vector2 startpos)
         {
+            Debug.Log(strucid + " structure attempted.");
+
             Structure struc = translateStruc(strucid, startpos);
 
             bool canbuild = true;
@@ -624,6 +682,10 @@ namespace Assets.Scripts.MapConstruction
                     return knowledgebase.strucLoader.getSkyscraper(startpos);
                 case 12: // diorite column
                     return knowledgebase.strucLoader.getDioriteColumn(startpos);
+                case 13: // strawberry bush
+                    return knowledgebase.strucLoader.getStrawberryBush(startpos);
+                case 14: // evergreen tree #2
+                    return knowledgebase.strucLoader.getTree2(startpos);
                 default: // no structure found
                     return null;
             }
