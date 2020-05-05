@@ -9,10 +9,6 @@ namespace Assets.Scripts.CharacterComponents
         private List<Dialogue> Chat;
         public bool isShop;
 
-        // Constructor
-        public NPC(int _ID, string _name) : base(_ID, _name)
-        {
 
-        }
     }
 }
