@@ -3,25 +3,15 @@
 		{
 			"id" : "0",
 			"name" : "Taiga",
-			"standard_block_id" : "7",
-			"standard_foilage_id" : "14",
+			"standard_block_id" : "1",
+			"standard_foilage_id" : "7",
 			"standard_liquid_id" : "0",
 			"region_class_id" : "3",
-			"top_occurance" : "15",
+			"top_occurance" : "20",
 			"bottom_occurance" : "0"
 		},
 		{
 			"id" : "1",
-			"name" : "Basalt w/ Lava",
-			"standard_block_id" : "8",
-			"standard_foilage_id" : "4",
-			"standard_liquid_id" : "1",
-			"region_class_id" : "5",
-			"top_occurance" : "0",
-			"bottom_occurance" : "35"
-		},
-		{
-			"id" : "2",
 			"name" : "Evergreen Forest",
 			"standard_block_id" : "1",
 			"standard_foilage_id" : "3",
@@ -31,24 +21,34 @@
 			"bottom_occurance" : "0"
 		},
 		{
-			"id" : "3",
+			"id" : "2",
 			"name" : "Sandy Dunes",
-			"standard_block_id" : "5",
+			"standard_block_id" : "1",
 			"standard_foilage_id" : "5",
 			"standard_liquid_id" : "0",
 			"region_class_id" : "7",
-			"top_occurance" : "20",
+			"top_occurance" : "40",
 			"bottom_occurance" : "0"
 		},
 		{
+			"id" : "3",
+			"name" : "Basalt",
+			"standard_block_id" : "22",
+			"standard_foilage_id" : "8",
+			"standard_liquid_id" : "1",
+			"region_class_id" : "5",
+			"top_occurance" : "0",
+			"bottom_occurance" : "20"
+		},
+		{
 			"id" : "4",
-			"name" : "Forge",
-			"standard_block_id" : "9",
-			"standard_foilage_id" : "4",
-			"standard_liquid_id" : "2",
+			"name" : "Caves",
+			"standard_block_id" : "0",
+			"standard_foilage_id" : "1",
+			"standard_liquid_id" : "0",
 			"region_class_id" : "8",
 			"top_occurance" : "0",
-			"bottom_occurance" : "30"
+			"bottom_occurance" : "0"
 		},
 		{
 			"id" : "5",
@@ -58,17 +58,17 @@
 			"standard_liquid_id" : "1",
 			"region_class_id" : "8",
 			"top_occurance" : "0",
-			"bottom_occurance" : "15"
+			"bottom_occurance" : "0"
 		},
 		{
 			"id" : "6",
-			"name" : "Caves",
+			"name" : "Graveyard",
 			"standard_block_id" : "0",
-			"standard_foilage_id" : "3",
-			"standard_liquid_id" : "0",
-			"region_class_id" : "8",
+			"standard_foilage_id" : "23",
+			"standard_liquid_id" : "1",
+			"region_class_id" : "5",
 			"top_occurance" : "0",
-			"bottom_occurance" : "0"
+			"bottom_occurance" : "20"
 		}
 	]
 }

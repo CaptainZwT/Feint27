@@ -6,7 +6,7 @@ namespace Assets.Scripts.CharacterComponents.Parts
     class Pouch
     {
         // initialzing variables
-        private List<Spell> spells;
+        public List<Spell> spells;
 
         /// <summary>
         /// Initializes spells with a empty list of Spells.

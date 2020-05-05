@@ -21,6 +21,8 @@ namespace Assets.Scripts.Knowledge_Base
         // Region information
         public Region[] regions;
         public Biome[] biomes;
+        // Structures
+        public StructureLoader strucLoader;
 
 
         public KnowledgeBase()
@@ -30,6 +32,7 @@ namespace Assets.Scripts.Knowledge_Base
             // loading item information
             var jsonString = Resources.Load<TextAsset>(datapath + "Items/items").ToString();
             items = JsonHelper.FromJson<Item>(jsonString);
+
             // loading liquid information
             jsonString = Resources.Load<TextAsset>(datapath + "Items/liquids").ToString();
             liquids = JsonHelper.FromJson<Liquid>(jsonString);
@@ -37,6 +40,7 @@ namespace Assets.Scripts.Knowledge_Base
             // loading region information
             jsonString = Resources.Load<TextAsset>(datapath + "regions").ToString();
             regions = JsonHelper.FromJson<Region>(jsonString);
+
             // loading region specific references
             foreach(Region r in regions)
             {
@@ -44,9 +48,11 @@ namespace Assets.Scripts.Knowledge_Base
                 r.standard_foilage = items.Single(item => item.id == r.standard_foilage_id);
                 r.standard_liquid = liquids.Single(item => item.id == r.standard_liquid_id);
             }
+
             // loading biome information
             jsonString = Resources.Load<TextAsset>(datapath + "biomes").ToString();
             biomes = JsonHelper.FromJson<Biome>(jsonString);
+
             // loading biome specific references and fixing occurance
             foreach (Biome b in biomes)
             {
@@ -57,6 +63,9 @@ namespace Assets.Scripts.Knowledge_Base
                 b.top_occurance = ((float)b.top_occurance / 100f);
                 b.bottom_occurance = ((float)b.bottom_occurance / 100f);
             }
+
+            // loading structures
+            strucLoader = new StructureLoader();
         }
     }
 }
