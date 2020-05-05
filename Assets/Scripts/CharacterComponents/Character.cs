@@ -8,26 +8,27 @@ namespace Assets.Scripts.CharacterComponents
     class Character : MonoBehaviour
     {
         // charateristics
-        public int ID;
 
-        // initialziing variables
-        private Inventory _inventory;
+        // initialziing components to drive character
+        public Inventory inventory;
+        public Pouch pouch;
+        public CharacterControl char_control;
 
         // initializing stats
         public float maxHealth, health, maxMana, mana, credits;
-        private float armor, cooldownReduction;
-        private float spellPower, alignment;
+        public float engineSpeed, engineAcceleration, engineFlightAccel;
 
-        /// <summary>
-        /// Initializes a new Character : It's charateristics and components
-        /// </summary>
-        /// <param name="_ID">ID</param>
-        /// <param name="_name">Name of Character</param>
-        public Character(int _ID, string _name)
+        public float armor, cooldownReduction;
+        public float spellPower, alignment;
+
+
+        public void Awake()
         {
-            ID = _ID;
-            name = _name;
+            char_control = GetComponent<CharacterControl>();
+        }
 
+        public void Start()
+        {
             // base stats
             maxHealth = 100;
             health = maxHealth;
@@ -35,9 +36,16 @@ namespace Assets.Scripts.CharacterComponents
             mana = maxMana;
             credits = 0;
             armor = 0;
+            alignment = 0;
+
+            // base spell stats
             cooldownReduction = 0;
             spellPower = 0;
-            alignment = 0;
+
+            // base movement stats
+            engineAcceleration = 2f;
+            engineFlightAccel = 2f;
+            engineSpeed = 0f;
         }
     }
 }

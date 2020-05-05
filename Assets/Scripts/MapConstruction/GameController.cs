@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour
         }
 
         CurrentTerrain = new World(300, 300, knowledgebase, gameObject);
-
     }
 
     /// <summary>

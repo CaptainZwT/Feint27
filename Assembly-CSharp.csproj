@@ -72,6 +72,8 @@
     <Compile Include="Assets\Scripts\CharacterComponents\Parts\NPC\Shop.cs" />
     <Compile Include="Assets\Scripts\CharacterComponents\Parts\Pouch.cs" />
     <Compile Include="Assets\Scripts\CharacterComponents\Player.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\SpellHandling.cs" />
+    <Compile Include="Assets\Scripts\CharacterComponents\UIController.cs" />
     <Compile Include="Assets\Scripts\Helpers\JsonHelper.cs" />
     <Compile Include="Assets\Scripts\Information\Events\Event.cs" />
     <Compile Include="Assets\Scripts\Information\Items\Consumable.cs" />
